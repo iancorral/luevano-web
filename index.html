@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Auto Alineaciones Luevano</title>
+<meta name="description" content="Alineación, balanceo y partes de suspensión en la Col. Campesina, Chihuahua. Rótulas, terminales, bujes, amortiguadores y más. Llama o escribe al 614 297 0351.">
+<meta property="og:title" content="Auto Alineaciones Luevano · Alineación y suspensión en Chihuahua">
+<meta property="og:description" content="Taller familiar en la Campesina. Alineación, balanceo y partes de suspensión. 614 297 0351.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:image" content="img/hero.jpg">
+<meta name="theme-color" content="#0F1E4D">
+<meta name="author" content="Ian Corral">
+<link rel="icon" href="favicon.png" type="image/png">
+
+<!-- Datos para Google: deben coincidir con el Perfil de Empresa (nombre, dirección, teléfono, horario). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Auto Alineaciones Luevano",
+  "alternateName": "Alineaciones Luevano",
+  "description": "Taller familiar de alineación, balanceo y partes de suspensión convencional en la colonia Campesina, Chihuahua.",
+  "telephone": "+52 614 297 0351",
+  "address": { "@type": "PostalAddress", "streetAddress": "Av. Silvestre Terrazas 7007", "addressLocality": "Chihuahua", "addressRegion": "Chih.", "postalCode": "31410", "addressCountry": "MX" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 28.6092401, "longitude": -106.0946299 },
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=Alineaciones%20Luevano&query_place_id=ChIJvX73Bv1c6oYRRtPLfB7TnTU",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:30", "closes": "18:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:30", "closes": "14:00" }
+  ],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "3" },
+  "areaServed": "Chihuahua, Chihuahua"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Yellowtail&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<header class="header" id="header">
+  <div class="wrap fila">
+    <a href="#inicio" class="logo-placa" aria-label="Auto Alineaciones Luevano, inicio"><img src="img/logo-luevano.png" alt="Auto Alineaciones Luevano" width="476" height="204"></a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#partes">Suspensión</a>
+      <a href="#cotizar">Cotizar</a>
+      <a href="#llegar">Cómo llegar</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:20px">
+      <a class="tel num" href="tel:+526142970351">614 297 0351</a>
+      <a class="btn btn-wa" href="https://wa.me/526142970351?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20pedir%20informes." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero" aria-labelledby="titulo">
+  <div class="foto"><img id="img-hero" src="img/hero.jpg" alt="Camioneta sobre la rampa de alineación con los sensores puestos en la llanta" width="991" height="1600" fetchpriority="high"></div>
+  <div class="wrap contenido">
+    <p class="kicker h-in">Taller familiar · Colonia Campesina · Chihuahua</p>
+    <h1 class="titulo" id="titulo">
+      <span class="linea"><span>Alineación</span></span>
+      <span class="linea"><span>y suspensión</span></span>
+      <span class="linea"><span class="rotulo">en la Campesina</span></span>
+    </h1>
+    <p class="lead h-in">Rótulas, terminales, bujes, amortiguadores, alineación y balanceo. Te decimos qué tiene tu carro y cuánto cuesta antes de empezar.</p>
+    <div class="acciones h-in">
+      <a class="btn btn-wa" href="#cotizar">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
+        <span>Cotizar por WhatsApp</span>
+      </a>
+      <a class="flecha" href="#servicios">Ver servicios</a>
+    </div>
+    <div class="datos h-in">
+      <span><span class="estrella">★</span> <b>4.7</b> en Google</span>
+      <span><span class="foco" id="foco"></span><span id="estado-txt">Lun a Vie 8:30–6:30 · Sáb 8:30–2:00</span></span>
+      <span><b>Tel.</b> <a href="tel:+526142970351" class="num" style="text-decoration:none">614 297 0351</a></span>
+    </div>
+  </div>
+</section>
+
+<section class="franja" aria-label="Cómo trabajamos">
+  <div class="fila">
+    <div class="item"><b>Sin cita</b><span>Llega en el horario</span></div>
+    <div class="item"><b>Abrimos sábado</b><span>De 8:30 a 2:00</span></div>
+    <div class="item"><b>Precio antes</b><span>No movemos nada sin tu sí</span></div>
+    <div class="item"><b>Todo tipo de carro</b><span>Nacionales, americanos y camionetas</span></div>
+  </div>
+</section>
+
+<section class="seccion" id="servicios">
+  <div class="wrap">
+    <div class="cabeza">
+      <div><p class="kicker rv">Servicios</p><h2 class="titulo rv">Empieza por lo que <span class="rotulo">notas</span></h2></div>
+      <p class="lead rv">No necesitas saber de mecánica. Elige lo que le pasa a tu carro y te decimos qué revisamos.</p>
+    </div>
+    <div class="explorador">
+      <div class="escena rv" role="tabpanel" aria-live="polite">
+        <span class="etq" id="esc-etq">Las llantas llegan abiertas y salen derechas</span>
+        <div class="vista" id="v-pieza" aria-hidden="true"></div>
+        <div class="info">
+          <h3 id="esc-t">Alineación</h3>
+          <p id="esc-p">Corrige hacia dónde apuntan las llantas. Las dejamos derechas como pide el fabricante: el carro deja de jalarse y las llantas duran más.</p>
+          <a class="btn btn-blanco" id="esc-a" href="https://wa.me/526142970351?text=Hola%2C%20quiero%20informes%20de%20alineaci%C3%B3n." target="_blank" rel="noopener"><span>Preguntar por alineación</span></a>
+        </div>
+      </div>
+      <ul class="lista rv" role="tablist" aria-label="Servicios" id="lista">
+        <li><button role="tab" aria-selected="true" data-s="alinea"><span class="n">Alineación</span><span class="s">Se jala, volante chueco, llantas gastadas de una orilla</span><span class="f" aria-hidden="true">→</span></button></li>
+        <li><button role="tab" aria-selected="false" data-s="suspension"><span class="n">Suspensión</span><span class="s">Truena en los baches, rebota o se siente flojo</span><span class="f" aria-hidden="true">→</span></button></li>
+        <li><button role="tab" aria-selected="false" data-s="balanceo"><span class="n">Balanceo</span><span class="s">Vibra el volante o el asiento en carretera</span><span class="f" aria-hidden="true">→</span></button></li>
+        <li><button role="tab" aria-selected="false" data-s="direccion"><span class="n">Dirección</span><span class="s">El volante pesa, tiene juego o hace ruido al girar</span><span class="f" aria-hidden="true">→</span></button></li>
+        <li><button role="tab" aria-selected="false" data-s="frenos"><span class="n">Frenos</span><span class="s">Rechina, vibra al frenar o el pedal se va hasta abajo</span><span class="f" aria-hidden="true">→</span></button></li>
+        <li><button role="tab" aria-selected="false" data-s="mecanica"><span class="n">Reparaciones</span><span class="s">Esas que en otros lados no hacen</span><span class="f" aria-hidden="true">→</span></button></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="seccion partes oscuro" id="partes">
+  <div class="wrap rejilla">
+    <div style="min-width:0">
+      <p class="kicker rv">Partes de suspensión convencional</p>
+      <h2 class="titulo rv">Lo que <span class="rotulo">cambiamos</span> todos los días</h2>
+      <p class="lead rv" style="margin-top:20px">Revisamos la suspensión pieza por pieza y te enseñamos la que está gastada antes de cambiarla.</p>
+      <ul class="piezas rv">
+        <li>Rótula superior</li><li>Rótula inferior</li>
+        <li>Terminal interior</li><li>Terminal exterior</li>
+        <li>Buje de horquilla superior</li><li>Buje de horquilla inferior</li>
+        <li>Buje de barra estabilizadora</li><li>Tornillo estabilizador</li>
+        <li>Amortiguador</li><li>Base de amortiguador</li>
+        <li>Resortes</li><li>Maza de rueda</li>
+      </ul>
+      <a class="flecha rv" style="margin-top:30px;color:#fff" href="https://wa.me/526142970351?text=Hola%2C%20quiero%20cotizar%20una%20pieza%20de%20suspensi%C3%B3n.%20Mi%20carro%20es%3A%20" target="_blank" rel="noopener">Cotizar una pieza</a>
+    </div>
+    <figure class="rv">
+      <img class="revela" src="img/cremallera.jpg" alt="Cremallera de dirección hidráulica con sus mangueras" loading="lazy" width="1200" height="470">
+      <figcaption>Cremallera de dirección, del Perfil de Google del taller.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="seccion" aria-labelledby="opinion-t">
+  <div class="wrap opinion">
+    <div class="rv">
+      <p class="kicker" id="opinion-t">Lo que dicen en Google</p>
+      <div class="calif">
+        <span class="num-g num">4.7</span>
+        <div>
+          <span class="estrellas" aria-label="4.7 de 5 estrellas">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.6 5.7 21l1.6-7L2 9.3l7-.7Z"/></svg><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.6 5.7 21l1.6-7L2 9.3l7-.7Z"/></svg><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.6 5.7 21l1.6-7L2 9.3l7-.7Z"/></svg><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.6 5.7 21l1.6-7L2 9.3l7-.7Z"/></svg><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.6 5.7 21l1.6-7L2 9.3l7-.7Z"/></svg>
+          </span>
+          <small>Calificación en Google Maps</small>
+        </div>
+      </div>
+      <a class="flecha" style="margin-top:26px;color:var(--azul)" data-enlace="resena" href="https://search.google.com/local/writereview?placeid=ChIJvX73Bv1c6oYRRtPLfB7TnTU" target="_blank" rel="noopener">Dejar mi opinión</a>
+    </div>
+    <blockquote class="rv">
+      <p>Buen servicio, realizan reparaciones que pocos lugares hacen.</p>
+      <footer><b>Saúl Guerrero</b> · Local Guide en Google</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="seccion mensaje" id="cotizar">
+  <div class="wrap">
+    <div class="cabeza">
+      <div><p class="kicker rv">Cotiza en un minuto</p><h2 class="titulo rv">Cuéntanos qué tiene tu <span class="rotulo">carro</span></h2></div>
+      <p class="lead rv">Marca lo que notas y te armamos el mensaje. Tú lo revisas y lo mandas por WhatsApp.</p>
+    </div>
+    <div class="armador">
+      <form id="form-msg" class="rv" novalidate>
+        <fieldset class="paso-form">
+          <legend><i>1</i>¿Qué le notas?</legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" value="se jala hacia un lado" id="c1"><span>Se jala</span></label>
+            <label class="chip"><input type="checkbox" value="el volante quedó chueco" id="c2"><span>Volante chueco</span></label>
+            <label class="chip"><input type="checkbox" value="vibra en carretera" id="c3"><span>Vibra</span></label>
+            <label class="chip"><input type="checkbox" value="truena en los baches" id="c4"><span>Truena en baches</span></label>
+            <label class="chip"><input type="checkbox" value="rechina al frenar" id="c5"><span>Rechina al frenar</span></label>
+            <label class="chip"><input type="checkbox" value="las llantas se gastan de una orilla" id="c6"><span>Llantas gastadas</span></label>
+            <label class="chip"><input type="checkbox" value="necesito cotizar una pieza de suspensión" id="c7"><span>Cotizar una pieza</span></label>
+          </div>
+        </fieldset>
+        <div class="paso-form">
+          <label class="t" for="vehiculo"><i>2</i>¿Qué carro es?</label>
+          <input class="campo" id="vehiculo" type="text" autocomplete="off" placeholder="Ej. Nissan Sentra 2015 o Ford F-150 2008">
+        </div>
+        <fieldset class="paso-form">
+          <legend><i>3</i>¿Cuándo te gustaría venir?</legend>
+          <div class="chips" id="chips-dia">
+            <label class="chip"><input type="radio" name="dia" value="hoy" id="d1"><span>Hoy</span></label>
+            <label class="chip"><input type="radio" name="dia" value="mañana" id="d2"><span>Mañana</span></label>
+            <label class="chip"><input type="radio" name="dia" value="el sábado" id="d3"><span>Sábado</span></label>
+            <label class="chip"><input type="radio" name="dia" value="cuando tengan lugar" id="d4" checked><span>Cuando tengan lugar</span></label>
+          </div>
+        </fieldset>
+      </form>
+      <div class="burbuja-caja rv">
+        <div class="telefono">
+          <div class="barra-chat"><img src="img/logo-luevano.png" alt="" width="38" height="38"><div>Auto Alineaciones Luevano<small>WhatsApp · 614 297 0351</small></div></div>
+          <div class="burbuja" id="burbuja">Hola, quiero cotizar en su taller.</div>
+        </div>
+        <a class="btn btn-wa" id="enviar" href="https://wa.me/526142970351" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
+          <span>Abrir en WhatsApp</span>
+        </a>
+        <p class="nota">Se abre WhatsApp con este texto. Puedes cambiarlo antes de mandarlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="para-quien">
+  <div class="wrap">
+    <div class="cabeza">
+      <div><p class="kicker rv">A tu horario</p><h2 class="titulo rv">Para quién <span class="rotulo">trabajamos</span></h2></div>
+      <p class="lead rv">Mucha gente en Chihuahua trabaja por turnos. Abrimos sábado y hacemos la alineación mientras esperas.</p>
+    </div>
+    <div class="columnas">
+      <article class="rv">
+        <div class="img"><img class="revela" src="img/rueda.jpg" alt="Mecánico ajustando la llanta de un auto" loading="lazy" width="1000" height="662"></div>
+        <h3>Si trabajas por turnos</h3>
+        <ul><li>Sábados de 8:30 a 2:00</li><li>Sin cita, esperas aquí</li><li>Te avisamos por WhatsApp</li></ul>
+        <a class="flecha" href="https://wa.me/526142970351?text=Hola%2C%20%C2%BFtienen%20lugar%20este%20s%C3%A1bado%3F" target="_blank" rel="noopener">Apartar el sábado</a>
+      </article>
+      <article class="rv">
+        <div class="img"><img class="revela" src="img/bajo-camioneta.jpg" alt="Mecánico revisando la suspensión debajo de una camioneta" loading="lazy" width="1000" height="561"></div>
+        <h3>Flotillas y empresas</h3>
+        <ul><li>Camionetas, vans y reparto</li><li>Transporte de personal</li><li>Revisión periódica de suspensión</li></ul>
+        <a class="flecha" href="https://wa.me/526142970351?text=Hola%2C%20tengo%20una%20flotilla%20y%20quiero%20cotizar%20alineaci%C3%B3n%20y%20suspensi%C3%B3n." target="_blank" rel="noopener">Cotizar mi flotilla</a>
+      </article>
+      <article class="rv">
+        <div class="img"><img class="revela" src="img/llantera.jpg" alt="Taller de llantas con rines acomodados en la pared" loading="lazy" width="1100" height="734"></div>
+        <h3>Talleres y mecánicos</h3>
+        <ul><li>¿Sin alineadora? Mándanos el carro</li><li>Te lo regresamos listo</li><li>Precio especial si nos mandas seguido</li></ul>
+        <a class="flecha" href="https://wa.me/526142970351?text=Hola%2C%20tengo%20un%20taller%20y%20quiero%20mandarles%20carros%20para%20alineaci%C3%B3n." target="_blank" rel="noopener">Hablar de taller a taller</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="llegar" style="padding-top:0">
+  <div class="wrap">
+    <div class="cabeza">
+      <div><p class="kicker rv">Cómo llegar</p><h2 class="titulo rv">Estamos por <span class="rotulo">enfrente</span></h2></div>
+      <div class="rv">
+        <p class="lead">Busca el letrero azul de <b style="color:var(--tinta)">Auto Alineaciones Luevano</b>. La entrada es por el frente, sobre la avenida.</p>
+        <p class="lead contacto-persona" data-contacto hidden>Al llegar, pregunta por <b style="color:var(--tinta)"></b>.</p>
+      </div>
+    </div>
+    <div class="llegar">
+      <figure class="croquis rv">
+        <svg viewBox="0 0 640 400" role="img" aria-labelledby="croquis-t">
+          <title id="croquis-t">Croquis: la entrada de Auto Alineaciones Luevano está al frente, sobre la avenida.</title>
+          <rect width="640" height="400" fill="#FFFFFF"/>
+          <rect x="0" y="312" width="640" height="88" fill="#DDE2EC"/>
+          <line x1="0" y1="356" x2="640" y2="356" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="22 16"/>
+          <text x="24" y="390" fill="#4A5266" style="font:600 13px 'Oswald',sans-serif;letter-spacing:.16em">AVENIDA</text>
+          <rect x="120" y="60" width="400" height="252" fill="#F4F5F8" stroke="#B8C0D1" stroke-width="2" stroke-dasharray="6 6"/>
+          <rect x="120" y="150" width="400" height="162" fill="#15337C"/>
+          <rect x="160" y="174" width="320" height="58" rx="2" fill="#FFFFFF"/>
+          <text x="320" y="211" text-anchor="middle" fill="#15337C" textLength="290" lengthAdjust="spacingAndGlyphs" style="font:700 22px 'Oswald',sans-serif">AUTO ALINEACIONES LUEVANO</text>
+          <text x="320" y="270" text-anchor="middle" fill="#9DBBFF" style="font:600 16px 'Oswald',sans-serif;letter-spacing:.22em">AQUÍ ES · AL FRENTE</text>
+          <path d="M320 344 v-36" stroke="#0E1426" stroke-width="6" stroke-linecap="round"/><path d="M304 322 l16 -18 l16 18" fill="none" stroke="#0E1426" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="352" y="338" fill="#0E1426" style="font:700 15px 'Atkinson Hyperlegible Next',sans-serif">Entrada</text>
+        </svg>
+        <figcaption>Croquis de referencia, no está a escala.</figcaption>
+      </figure>
+      <div class="rv">
+        <p class="direccion">Av. Silvestre Terrazas 7007<br>Campesina Nueva, 31410 Chihuahua</p>
+        <div class="acciones-llegar">
+          <a class="btn btn-azul" data-enlace="ruta" href="https://www.google.com/maps/dir/?api=1&destination=Alineaciones%20Luevano&destination_place_id=ChIJvX73Bv1c6oYRRtPLfB7TnTU" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>Google Maps</span>
+          </a>
+          <a class="btn btn-linea" style="color:var(--azul)" data-enlace="waze" href="https://waze.com/ul?ll=28.6092401,-106.0946299&navigate=yes" target="_blank" rel="noopener"><span>Waze</span></a>
+        </div>
+        <div class="extra">
+          <button type="button" class="enlace" id="copiar-dir">Copiar dirección</button>
+          <a class="enlace" id="compartir" href="#" target="_blank" rel="noopener">Mandar ubicación por WhatsApp</a>
+          <span class="aviso" id="aviso" hidden>Copiada</span>
+        </div>
+        <table class="tabla num" aria-label="Horario">
+          <tbody id="horario">
+            <tr data-d="1"><td>Lunes</td><td>8:30 am – 6:30 pm</td></tr>
+            <tr data-d="2"><td>Martes</td><td>8:30 am – 6:30 pm</td></tr>
+            <tr data-d="3"><td>Miércoles</td><td>8:30 am – 6:30 pm</td></tr>
+            <tr data-d="4"><td>Jueves</td><td>8:30 am – 6:30 pm</td></tr>
+            <tr data-d="5"><td>Viernes</td><td>8:30 am – 6:30 pm</td></tr>
+            <tr data-d="6"><td>Sábado</td><td>8:30 am – 2:00 pm</td></tr>
+            <tr data-d="0"><td>Domingo</td><td style="color:var(--gris);font-weight:400">Cerrado</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0">Teléfono y WhatsApp: <a href="tel:+526142970351" class="num" style="font-weight:700">614 297 0351</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="preguntas" style="padding-top:0">
+  <div class="wrap cabeza" style="align-items:start">
+    <div><p class="kicker rv">Preguntas</p><h2 class="titulo rv">Antes de <span class="rotulo">venir</span></h2></div>
+    <div class="rv" style="min-width:0">
+      <details><summary>¿Necesito hacer cita?<span class="mas" aria-hidden="true">+</span></summary><p>No. Llega en el horario. Si quieres asegurar lugar, sobre todo en sábado, mándanos WhatsApp antes.</p></details>
+      <details><summary>¿Qué diferencia hay entre alineación y balanceo?<span class="mas" aria-hidden="true">+</span></summary><p>La alineación corrige hacia dónde apuntan las llantas, para que el carro vaya derecho y no se coma las llantas. El balanceo corrige el peso de cada llanta, para que no vibre. Son dos trabajos distintos y muchas veces conviene hacer los dos.</p></details>
+      <details><summary>¿Cuánto tarda una alineación?<span class="mas" aria-hidden="true">+</span></summary><p>Entre 30 y 60 minutos en la mayoría de los carros. Si encontramos una pieza dañada, te avisamos antes de hacer cualquier cosa.</p></details>
+      <details><summary>¿Ustedes consiguen las piezas de suspensión?<span class="mas" aria-hidden="true">+</span></summary><p>Sí. Mándanos marca, modelo y año de tu carro por WhatsApp y te cotizamos la pieza con la instalación.</p></details>
+      <details><summary>¿Atienden autos americanos?<span class="mas" aria-hidden="true">+</span></summary><p>Sí. Autos nacionales, americanos y regularizados, camionetas y camiones ligeros.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cierre oscuro" aria-labelledby="cierre-t">
+  <span class="lineas" aria-hidden="true"></span>
+  <div class="wrap fila">
+    <div><p class="kicker rv">Tu siguiente paso</p><h2 class="titulo rv" id="cierre-t">Que tu carro vaya <span class="rotulo">derechito</span></h2></div>
+    <div class="rv">
+      <p>Cuéntanos qué le notas. Empezamos por ahí.</p>
+      <a class="btn btn-blanco" href="#cotizar"><span>Armar mi mensaje</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <div class="wrap cols">
+    <span class="logo-placa" style="display:inline-block"><img src="img/logo-luevano.png" alt="Auto Alineaciones Luevano" width="476" height="204" style="height:56px;width:auto"></span>
+    <div><b>Visítanos</b><p>Av. Silvestre Terrazas 7007<br>Campesina Nueva, 31410 Chihuahua<br>Entrada por enfrente</p></div>
+    <div><b>Contacto</b><p class="num">614 297 0351<br>Lun–Vie 8:30–6:30 · Sáb 8:30–2:00</p></div>
+  </div>
+  <div class="wrap legal">
+    <span>© <span id="anio">2026</span> Auto Alineaciones Luevano · <a href="aviso-de-privacidad.html">Aviso de privacidad</a></span>
+    <a class="firma" id="firma" href="#" aria-label="Sitio hecho por Ian Corral">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M81.2 32 A36 36 0 1 0 81.2 68" fill="none" stroke="#FFFFFF" stroke-width="14"/><rect x="40" y="33" width="12" height="34" fill="#3B7BFF"/></svg>
+      <span>Sitio hecho por <b>Ian Corral</b></span>
+    </a>
+  </div>
+</footer>
+
+<a class="wa-flotante" id="wa-flotante" href="https://wa.me/526142970351?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20pedir%20informes." target="_blank" rel="noopener">
+  <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg></span>
+  <span><b>Escríbenos</b><small>Te contestamos por WhatsApp</small></span>
+</a>
+
+<nav class="barra" aria-label="Acciones rápidas">
+  <a href="tel:+526142970351"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>Llamar</a>
+  <a class="wa" href="https://wa.me/526142970351?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20pedir%20informes." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>WhatsApp</a>
+  <a data-enlace="ruta" href="https://www.google.com/maps/dir/?api=1&destination=Alineaciones%20Luevano&destination_place_id=ChIJvX73Bv1c6oYRRtPLfB7TnTU" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Cómo llegar</a>
+</nav>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

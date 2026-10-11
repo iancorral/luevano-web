@@ -1,0 +1,20 @@
+{
+  "name": "auto-alineaciones-luevano",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Sitio web de Auto Alineaciones Luevano (Chihuahua). Hecho por Ian Corral.",
+  "author": "Ian Corral",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "three": "0.160.0"
+  },
+  "devDependencies": {
+    "vite": "6.3.5"
+  }
+}
