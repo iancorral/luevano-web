@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "description": "Sitio web de Auto Alineaciones Luevano (Chihuahua). Hecho por Ian Corral.",
+  "description": "Website for Auto Alineaciones Luevano, a family-owned alignment and suspension shop in Chihuahua, Mexico.",
   "author": "Ian Corral",
   "engines": {
     "node": ">=22.12.0"

@@ -1,103 +1,151 @@
-# Auto Alineaciones Luevano · sitio web
+# Auto Alineaciones Luevano — Website
 
-Sitio de **Auto Alineaciones Luevano** (Col. Campesina, Chihuahua): portada + una página por servicio.
-Diseño y desarrollo: **Ian Corral**.
+Website for **Auto Alineaciones Luevano**, a family-owned wheel alignment and suspension
+shop in Chihuahua, Mexico, open since 1968. The goal is local visibility: customers find
+the shop on Google, see what it does, and call or send a WhatsApp message in one tap.
 
-## Cómo correrlo
+Custom website built for one client — not a template or a multi-tenant product.
 
-Necesitas [Node.js](https://nodejs.org) 22.12 o más nuevo.
+---
+
+## Features
+
+- Home page plus one page per service (alignment, suspension, balancing, steering, brakes,
+  repairs), each with its own SEO metadata and structured data.
+- Service explorer as an accordion: details open right under the tapped service; on mobile
+  the 3D piece moves inside the open item.
+- Procedural 3D parts (three.js) that fit themselves to the frame, load only when the
+  section is near and stop rendering when off screen.
+- WhatsApp quote builder: the customer picks symptoms, car and day, and the message is
+  composed for them.
+- Open/closed status and hours computed in Chihuahua time (UTC-6).
+- Motion system with GSAP (shutter intro, line-by-line headings, image reveals,
+  scroll-reactive ticker) that turns off with `prefers-reduced-motion`.
+- Fluid layout in `rem` that scales on large monitors and respects the browser font size.
+- Mobile action bar (call · WhatsApp · directions) and a mobile menu.
+- Work gallery that appears automatically when photos are added.
+- `AutoRepair`, `Service` and `BreadcrumbList` JSON-LD, sitemap and robots.txt.
+- Content Security Policy with hashes, plus security headers on Vercel.
+
+---
+
+## Stack
+
+| Layer     | Technology                                        |
+| --------- | ------------------------------------------------- |
+| Framework | Astro 7 (static output)                           |
+| Language  | TypeScript (strictest)                            |
+| Styling   | Scoped CSS with design tokens (custom properties) |
+| Animation | GSAP 3 (ScrollTrigger, SplitText)                 |
+| 3D        | three.js                                          |
+| Fonts     | Self-hosted via the Astro Fonts API (Fontsource)  |
+| Images    | `astro:assets` (AVIF / WebP, responsive sizes)    |
+| Testing   | Vitest                                            |
+| Linting   | ESLint + Prettier                                 |
+| Hosting   | Vercel                                            |
+
+---
+
+## Requirements
+
+- Node.js 22.12 or later
+- npm
+
+---
+
+## Getting started
 
 ```bash
-npm install      # una sola vez
-npm run dev      # http://localhost:4321
-npm run dev:lan  # igual, pero visible desde el celular en la misma red (úsalo solo en redes de confianza)
-npm run build    # revisa tipos y genera dist/ lista para subir
-npm run preview  # prueba la versión de dist/
-npm test         # pruebas (Vitest)
-npm run lint     # ESLint
-npm run format   # Prettier
+git clone https://github.com/iancorral/luevano-web.git
+cd luevano-web
+npm install
+npm run dev
 ```
 
-## Dónde cambiar cada cosa
+The site runs at `http://localhost:4321`. No environment variables are needed.
 
-| Qué                                                                         | Archivo                                                             |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Nombre, teléfono, WhatsApp, dirección, horario, calificación, reseña, firma | `src/config/business.ts` (todo el sitio y el JSON-LD salen de aquí) |
-| Dominio del sitio                                                           | `src/config/site.ts`                                                |
-| Servicios (portada y su página propia)                                      | `src/data/services.ts`                                              |
-| Piezas de suspensión, franja en movimiento, cotizador, "para quién", FAQ    | `src/data/content.ts`                                               |
-| Colores y espacios                                                          | `src/styles/tokens.css`                                             |
-| Tipografías                                                                 | `astro.config.ts` → `fonts` (se sirven desde el propio sitio)       |
-| Animaciones                                                                 | `src/scripts/motion/`                                               |
-| Piezas 3D                                                                   | `src/scripts/scene3d/`                                              |
-| Fotos                                                                       | `src/assets/images/` (Astro las optimiza a AVIF/WebP)               |
-| Fotos de trabajos reales (sección "Así queda tu carro")                     | `src/assets/images/work/` + descripción en `WORK_CAPTIONS`          |
-| Headers de seguridad y URLs limpias en Vercel                               | `vercel.json`                                                       |
+---
 
-## Estructura
+## Scripts
+
+```bash
+npm run dev       # development server
+npm run dev:lan   # development server visible on the local network (test on a phone)
+npm run build     # type check + production build to dist/
+npm run preview   # serve the production build
+npm test          # unit tests (Vitest)
+npm run lint      # ESLint
+npm run format    # Prettier
+```
+
+---
+
+## Project structure
 
 ```
 src/
-  config/        datos del negocio y dominio (una sola fuente)
-  data/          contenido: servicios, partes, preguntas
-  lib/           horario, enlaces de WhatsApp/Maps, datos estructurados (JSON-LD)
-  layouts/       BaseLayout: <head>, SEO, CSP, fuentes
-  components/
-    layout/      Header, Footer, barra del celular, botón flotante, cortina de entrada
-    sections/    cada sección de las páginas
-    ui/          Button, ArrowLink, Kicker, SectionHeader, Icon
-  scripts/
-    motion/      GSAP: cortina, títulos por línea, bloques, fotos, franja, guía láser
-    scene3d/     three.js: escenario, encuadre automático y piezas
-  pages/         index, [service] (una página por servicio), aviso-de-privacidad, 404, robots.txt
-  styles/        tokens.css, global.css
-public/          favicon
-docs/            guía de la ficha de Google
-vercel.json      headers de seguridad y URLs sin .html
-_material/       fotos de referencia (no se publica ni se sube a git)
+├── config/          Business data (single source of truth) and site URL
+├── data/            Content: services, suspension parts, FAQ, audiences, ticker
+├── lib/             Hours, WhatsApp / Maps links, structured data (JSON-LD)
+├── layouts/         BaseLayout: <head>, SEO, CSP, fonts, motion bootstrap
+├── components/
+│   ├── layout/      Header, Footer, mobile action bar, WhatsApp button, intro shutter
+│   ├── sections/    Page sections (hero, services, quote builder, directions, ...)
+│   └── ui/          Button, ArrowLink, Kicker, SectionHeader, Icon
+├── scripts/
+│   ├── motion/      GSAP: intro, reveals, ticker, scroll progress
+│   └── scene3d/     three.js stage, auto-framing and procedural parts
+├── pages/           index, [service], aviso-de-privacidad, 404, robots.txt
+├── styles/          tokens.css, global.css
+└── assets/images/   Photos (optimized at build time); work/ feeds the gallery
+docs/                Google Business Profile playbook (Spanish, for the client)
+vercel.json          Security headers and clean URLs
 ```
 
-Convenciones: código, archivos y carpetas en inglés; textos del sitio en español de México; comentarios cortos en español solo donde hacen falta.
+---
 
-## Tecnologías
+## Where to change things
 
-- **Astro 7** + **TypeScript** (modo estricto): HTML estático, cero JavaScript por defecto, componentes y datos en un solo lugar.
-- **GSAP 3.15** (ScrollTrigger y SplitText, ahora gratuitos) para las animaciones.
-- **three.js** para las piezas 3D. Se descarga solo cuando la sección está por aparecer y deja de dibujar cuando sale de pantalla.
-- Fuentes auto-hospedadas: Oswald, Yellowtail y Atkinson Hyperlegible Next.
-- **Content-Security-Policy** generada por Astro con hashes, más headers en `vercel.json`.
-- Diseño fluido: todo en `rem`; en pantallas grandes la base crece de 16px a 22px.
-- Respeta "reducir movimiento" del sistema: sin cortina ni animaciones.
+| What                                                      | File                                        |
+| --------------------------------------------------------- | ------------------------------------------- |
+| Name, phones, WhatsApp, address, hours, rating, social    | `src/config/business.ts`                    |
+| Site URL                                                  | `src/config/site.ts`                        |
+| Services (home explorer + service pages)                  | `src/data/services.ts`                      |
+| Parts list, ticker, quote builder options, FAQ, audiences | `src/data/content.ts`                       |
+| Work photos                                               | `src/assets/images/work/` + `WORK_CAPTIONS` |
+| Colors and spacing                                        | `src/styles/tokens.css`                     |
+| Fonts                                                     | `astro.config.ts` → `fonts`                 |
 
-## Pendientes antes de publicar
+---
 
-- [ ] Confirmar el horario del **martes** (en Google dice hasta las 6:30).
-- [ ] Si se pone "Pregunta por…" (`contactPerson`).
-- [ ] Cambiar las fotos de muestra (Unsplash) por **fotos reales del taller**.
-- [ ] Agregar fotos de trabajos en `src/assets/images/work/` (de su Facebook o del celular).
-- [ ] Permiso por escrito de la dueña para usar su logo, fotos y reseñas.
-- [ ] Revisar el aviso de privacidad con ella.
-- [ ] Comprar el dominio a nombre de ella y ponerlo en `src/config/site.ts`.
-- [ ] URL del portafolio en `author.url`.
+## Conventions
 
-## SEO local (fuera del código)
+- **Business data lives only in `src/config/business.ts`.** Text, links and JSON-LD are
+  generated from it; never hard-code a phone number or address in markup.
+- **Zero JavaScript by default.** Each component ships only the script it needs; three.js
+  is a separate chunk loaded on demand.
+- **Everything in `rem`.** The root size grows from 16px to 22px on wide screens.
+- **Accessibility first:** 18px minimum body text, 58px buttons, high-contrast palette,
+  keyboard-friendly accordion and menu, reduced-motion support.
+- **Strict CSP:** no inline `style` attributes; dynamic styles go through CSSOM.
+- Code, file names and identifiers in English; site copy in Mexican Spanish.
 
-- Perfil de Google: verificar, nombre igual al letrero, mover el pin, categorías, fotos reales, alertas de cambios, 2FA.
-- Reseñas: QR en el mostrador y mensaje de WhatsApp después de cada trabajo (`links.review`).
-- **Zona Comercial**: ahí solo aparece "Direcciones y Alineaciones Luevano" (Silvestre Terrazas 7011, 614 137 8921). Hay que **dar de alta su negocio**, no reclamar esa ficha.
-- Mismos datos en Facebook, Apple Business Connect, Bing Places, Waze y Sección Amarilla.
-- Al publicar: Google Search Console y Bing Webmaster con `sitemap-index.xml`.
+---
 
-## Publicarlo
+## Deployment
 
-Se publica en **Vercel** desde GitHub (rama `main`): cada `git push` vuelve a publicar solo.
+Deployed on **Vercel** from the `main` branch; every push triggers a new deployment.
+Vercel detects Astro automatically (`npm run build`, output `dist/`).
 
-- Vercel detecta Astro; no hay que configurar nada (comando `npm run build`, carpeta `dist`).
-- Mientras se use la URL `…vercel.app`, el sitio sale con **noindex** para que Google no lo indexe todavía (`src/config/site.ts`).
-- Al comprar el dominio: agregarlo en Vercel → Settings → Domains. La URL del sitio se toma sola de Vercel.
+While the site is served from a `*.vercel.app` URL it is marked `noindex` and robots.txt
+disallows crawling, so search engines wait for the real domain. Once a custom domain is
+added in Vercel, the site URL, canonical links and sitemap pick it up automatically.
 
-## Notas legales (no es asesoría legal)
+---
 
-- **Aviso de privacidad (LFPDPPP):** el sitio no guarda datos ni usa cookies; el taller sí recibe datos por WhatsApp.
-- Si se agrega analítica, usar una sin cookies (Cloudflare Web Analytics, Plausible o Umami).
-- Solo se citan reseñas reales y públicas de Google, con el nombre como aparece ahí.
+## License
+
+Copyright © 2026 Ian Corral. All rights reserved.
+
+This website was developed for Auto Alineaciones Luevano, a family-owned auto repair shop
+in Chihuahua, Mexico.

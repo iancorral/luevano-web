@@ -54,3 +54,26 @@ Trabajadores de maquila por turnos (importa el sábado y "esperas aquí"), autos
 - Repo **privado** en GitHub: `iancorral/luevano-web` (rama `main`). Vercel publica cada push.
 - Commits solo a nombre de Ian, **sin** "Co-Authored-By" ni menciones a Claude.
 - Ian prefiere respuestas concisas con ejemplos y justificación antes de implementar.
+- README y "About" de GitHub en inglés, con el mismo formato que sus repos DARPE y Tangible.
+
+## Pendientes antes de publicar
+
+- [ ] Confirmar el horario del **martes** (en Google dice hasta las 6:30).
+- [ ] Si se pone "Pregunta por…" (`contactPerson`).
+- [ ] Cambiar las fotos de muestra (Unsplash) por **fotos reales del taller**.
+- [ ] Agregar fotos de trabajos en `src/assets/images/work/` (de su Facebook o del celular).
+- [ ] Permiso por escrito de la dueña para usar su logo, fotos y reseñas.
+- [ ] Revisar el aviso de privacidad con ella.
+- [ ] Comprar el dominio a nombre de ella y agregarlo en Vercel.
+- [ ] URL del portafolio en `author.url`.
+- [ ] Poner la URL de Vercel (y luego el dominio) en "Website" del About de GitHub.
+
+## SEO local (fuera del código)
+
+Plan completo en `docs/google-business-profile.md`. Resumen:
+
+- Ficha de Google: nombre igual al letrero, categoría de alineación, fotos reales, unir el duplicado, 2FA.
+- Reseñas: QR en el mostrador y mensaje de WhatsApp después de cada trabajo (`links.review`).
+- **Zona Comercial**: solo aparece la ficha del sobrino; hay que dar de alta la de ella.
+- Mismos datos en Facebook, Apple Business Connect, Bing Places y Sección Amarilla.
+- Al publicar con dominio: Google Search Console y Bing Webmaster con `sitemap-index.xml`.
