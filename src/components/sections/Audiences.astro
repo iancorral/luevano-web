@@ -1,0 +1,94 @@
+---
+import { Picture } from 'astro:assets';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import { AUDIENCES } from '@/data/content';
+import { links } from '@/lib/links';
+---
+
+<section class="section" id="para-quien">
+  <div class="container">
+    <SectionHeader kicker="A tu horario">
+      Para quién <span class="script">trabajamos</span>
+      <p class="lead" slot="lead">
+        ¿Trabajas toda la semana? Abrimos sábado y hacemos la alineación mientras esperas.
+      </p>
+    </SectionHeader>
+    <div class="audiences">
+      {AUDIENCES.map((audience) => (
+        <article class="audience">
+          <div class="audience__frame" data-reveal-image>
+            <Picture
+              src={audience.image.src}
+              alt={audience.image.alt}
+              widths={[400, 700, 1000]}
+              sizes="(min-width: 900px) 30vw, 100vw"
+              formats={['avif', 'webp']}
+            />
+          </div>
+          <div data-reveal>
+            <h3>{audience.title}</h3>
+            <ul>
+              {audience.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+            <ArrowLink href={links.whatsapp(audience.cta.message)}>{audience.cta.label}</ArrowLink>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .audiences {
+    display: grid;
+    gap: 2.75rem;
+  }
+
+  @media (min-width: 900px) {
+    .audiences {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+    }
+  }
+
+  .audience__frame {
+    overflow: hidden;
+  }
+
+  .audience__frame :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease-out);
+  }
+
+  .audience h3 {
+    margin: 1.375rem 0 0.625rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.85rem;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  .audience ul {
+    margin: 0 0 1.125rem;
+    padding-left: 1.25rem;
+    color: var(--gray);
+  }
+
+  .audience li {
+    margin: 0.25rem 0;
+  }
+
+  .audience li::marker {
+    color: var(--blue-bright);
+  }
+
+  .audience :global(.arrow-link) {
+    color: var(--blue);
+  }
+</style>

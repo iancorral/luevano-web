@@ -1,0 +1,163 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Todo el sitio está en rem: en pantallas de más de ~1400px la base crece poco a poco
+   (16px → 22px), para que en monitores grandes no se vea chico ni vacío.
+   Respeta el tamaño de letra que la persona elija en su navegador. */
+html {
+  font-size: clamp(100%, 0.4vw + 0.65rem, 137.5%);
+  background: var(--bone);
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  padding-bottom: var(--action-bar-height);
+}
+
+@media (min-width: 900px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue-bright);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: 82.5rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.section-flush-top {
+  padding-top: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.dark {
+  background: var(--blue-dark);
+  color: var(--white);
+}
+
+/* Títulos condensados en mayúsculas + una palabra en letra de rotulista */
+.heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+h2.heading {
+  font-size: clamp(2.5rem, 5.4vw, 4.4rem);
+}
+
+.script {
+  display: inline-block;
+  padding-right: 0.08em;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 1.12em;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--blue-bright);
+}
+
+.dark .script,
+.on-photo .script {
+  color: var(--sky);
+}
+
+.lead {
+  max-width: 46ch;
+  margin: 0;
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--gray);
+}
+
+.dark .lead,
+.on-photo .lead {
+  color: var(--muted-on-dark);
+}
+
+/* Movimiento: estado inicial mientras carga el script (ver BaseLayout) */
+.motion-pending [data-reveal],
+.motion-pending [data-split],
+.motion-pending [data-hero-title],
+.motion-pending [data-hero-fade] {
+  visibility: hidden;
+}
+
+.motion-pending [data-reveal-image] {
+  clip-path: inset(100% 0 0 0);
+}
+
+/* Máscara de SplitText: margen para que la letra de rotulista no se corte */
+.split-line-mask {
+  padding-block: 0.08em 0.14em;
+  margin-block: -0.08em -0.14em;
+}

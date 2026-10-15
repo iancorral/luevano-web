@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'p'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<p class:list={['kicker', className]} data-kicker {...rest}>
+  <slot />
+</p>
+
+<style>
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin: 0 0 1.125rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* La línea se dibuja como la guía láser de la alineadora (ver scripts/motion) */
+  .kicker::before {
+    content: '';
+    width: 2.75rem;
+    height: 2px;
+    flex: none;
+    background: var(--blue-bright);
+    transform-origin: left;
+    transform: scaleX(var(--line-progress, 1));
+  }
+
+  :global(.dark) .kicker,
+  :global(.on-photo) .kicker {
+    color: var(--muted-on-dark);
+  }
+</style>

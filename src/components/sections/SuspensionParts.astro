@@ -1,0 +1,138 @@
+---
+import { Picture } from 'astro:assets';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Kicker from '@/components/ui/Kicker.astro';
+import steeringRack from '@/assets/images/steering-rack.jpg';
+import { PART_QUOTE_MESSAGE, SUSPENSION_PARTS } from '@/data/content';
+import { links } from '@/lib/links';
+
+interface Props {
+  showPageLink?: boolean;
+}
+
+const { showPageLink = true } = Astro.props;
+---
+
+<section class="section dark parts" id="partes">
+  <div class="container parts__grid">
+    <div class="parts__text">
+      <Kicker data-reveal>Partes de suspensión convencional</Kicker>
+      <h2 class="heading" data-split>
+        Lo que <span class="script">cambiamos</span> todos los días
+      </h2>
+      <p class="lead parts__lead" data-reveal>
+        Revisamos la suspensión pieza por pieza y te enseñamos la que está gastada antes de cambiarla.
+      </p>
+      <ul class="parts__list" data-reveal>
+        {SUSPENSION_PARTS.map((part) => (
+          <li>{part}</li>
+        ))}
+      </ul>
+      <div class="parts__links" data-reveal>
+        <ArrowLink href={links.whatsapp(PART_QUOTE_MESSAGE)}>Cotizar una pieza</ArrowLink>
+        {showPageLink && <ArrowLink href="/suspension">Todo sobre suspensión</ArrowLink>}
+      </div>
+    </div>
+    <figure class="parts__figure">
+      <div class="parts__frame" data-reveal-image>
+        <Picture
+          src={steeringRack}
+          alt="Cremallera de dirección hidráulica con sus mangueras"
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 980px) 45vw, 100vw"
+          formats={['avif', 'webp']}
+        />
+      </div>
+      <figcaption data-reveal>Cremallera de dirección, del Perfil de Google del taller.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .parts {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .parts__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 980px) {
+    .parts__grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  .parts__text {
+    min-width: 0;
+  }
+
+  .parts__lead {
+    margin-top: 1.25rem;
+  }
+
+  .parts__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.75rem;
+    margin: 1.875rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 520px) {
+    .parts__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .parts__list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.8125rem 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.14);
+    font-weight: 700;
+  }
+
+  .parts__list li::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: none;
+    border-radius: 50%;
+    background: var(--sky);
+    transform: translateY(-2px);
+  }
+
+  .parts__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.25rem;
+    margin-top: 1.875rem;
+  }
+
+  .parts__figure {
+    margin: 0;
+  }
+
+  .parts__frame {
+    overflow: hidden;
+  }
+
+  .parts__frame :global(img) {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+  }
+
+  .parts__figure figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted-on-dark);
+    font-size: 0.9375rem;
+  }
+</style>

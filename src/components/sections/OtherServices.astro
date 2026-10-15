@@ -1,0 +1,73 @@
+---
+import Kicker from '@/components/ui/Kicker.astro';
+import { SERVICES } from '@/data/services';
+
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+const others = SERVICES.filter((service) => service.slug !== currentSlug);
+---
+
+<section class="section section-flush-top" aria-labelledby="other-services">
+  <div class="container">
+    <Kicker id="other-services" data-reveal>
+      También hacemos
+    </Kicker>
+    <ul class="others" data-reveal>
+      {others.map((service) => (
+        <li>
+          <a href={`/${service.slug}`}>
+            <span class="others__name">{service.name}</span>
+            <span class="others__symptoms">{service.symptoms}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .others {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 760px) {
+    .others {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+  }
+
+  .others a {
+    display: block;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .others__name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    color: var(--blue);
+    transition: color 0.25s;
+  }
+
+  .others a:hover .others__name {
+    color: var(--blue-bright);
+  }
+
+  .others__symptoms {
+    color: var(--gray);
+    font-size: 1rem;
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Icon from '@/components/ui/Icon.astro';
+import Kicker from '@/components/ui/Kicker.astro';
+import { BUSINESS } from '@/config/business';
+import { links } from '@/lib/links';
+
+const { rating, featuredReview } = BUSINESS;
+---
+
+<section class="section" aria-labelledby="review-title">
+  <div class="container review">
+    <div data-reveal>
+      <Kicker id="review-title">Lo que dicen en Google</Kicker>
+      <div class="review__score">
+        <span class="review__number" data-count-to={rating.value} data-decimals="1">
+          {rating.value}
+        </span>
+        <div>
+          <span class="review__stars" role="img" aria-label={`${rating.value} de 5 estrellas`}>
+            {Array.from({ length: 5 }, () => (
+              <Icon name="star" />
+            ))}
+          </span>
+          <small>Calificación en Google Maps</small>
+        </div>
+      </div>
+      <ArrowLink href={links.review} class="review__link">
+        Dejar mi opinión
+      </ArrowLink>
+    </div>
+    <blockquote data-reveal>
+      <p>{featuredReview.text}</p>
+      <footer>
+        <b>{featuredReview.author}</b> · {featuredReview.badge}
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .review {
+    display: grid;
+    gap: 2.25rem;
+    align-items: center;
+  }
+
+  @media (min-width: 980px) {
+    .review {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4rem;
+    }
+  }
+
+  .review__score {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+  }
+
+  .review__number {
+    min-width: 2.1ch;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4.5rem, 9vw, 7rem);
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+    color: var(--blue);
+  }
+
+  .review__stars {
+    display: flex;
+    gap: 3px;
+    color: #e8a800;
+  }
+
+  .review__stars :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .review small {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--gray);
+    font-size: 0.9375rem;
+  }
+
+  .review :global(.review__link) {
+    margin-top: 1.625rem;
+    color: var(--blue);
+  }
+
+  blockquote {
+    margin: 0;
+  }
+
+  blockquote p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  blockquote p::before {
+    content: '“';
+    color: var(--blue-bright);
+  }
+
+  blockquote p::after {
+    content: '”';
+    color: var(--blue-bright);
+  }
+
+  blockquote footer {
+    margin-top: 1.125rem;
+    color: var(--gray);
+  }
+
+  blockquote footer b {
+    color: var(--ink);
+  }
+</style>

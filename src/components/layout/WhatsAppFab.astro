@@ -1,0 +1,96 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { links, WHATSAPP_GREETING } from '@/lib/links';
+---
+
+<a class="fab" href={links.whatsapp(WHATSAPP_GREETING)} target="_blank" rel="noopener" data-fab>
+  <span class="fab__icon">
+    <Icon name="whatsapp" />
+  </span>
+  <span>
+    <b>Escríbenos</b>
+    <small>Te contestamos por WhatsApp</small>
+  </span>
+</a>
+
+<script>
+  const fab = document.querySelector<HTMLElement>('[data-fab]');
+  if (fab) {
+    const hero = document.querySelector<HTMLElement>('[data-hero]');
+    const update = () => {
+      const threshold = hero ? hero.offsetHeight * 0.7 : 400;
+      fab.classList.toggle('is-visible', window.scrollY > threshold);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>
+
+<style>
+  .fab {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 45;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1.375rem 0.625rem 0.625rem;
+    border-radius: 62.4375rem;
+    background: var(--whatsapp);
+    color: var(--white);
+    text-decoration: none;
+    box-shadow: 0 1rem 2.125rem -0.875rem rgb(10 60 30 / 0.65);
+    transform: translateY(140%);
+    opacity: 0;
+    transition:
+      transform 0.45s var(--ease-out),
+      opacity 0.3s,
+      background-color 0.2s;
+  }
+
+  .fab.is-visible {
+    transform: none;
+    opacity: 1;
+  }
+
+  .fab:hover {
+    background: var(--whatsapp-hover);
+  }
+
+  .fab__icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.16);
+  }
+
+  .fab__icon :global(svg) {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .fab b {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .fab small {
+    display: block;
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 900px) {
+    .fab {
+      display: flex;
+    }
+  }
+</style>

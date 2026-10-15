@@ -1,0 +1,333 @@
+---
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import logo from '@/assets/images/logo.png';
+import { BUSINESS } from '@/config/business';
+import { SYMPTOM_OPTIONS, VISIT_OPTIONS } from '@/data/content';
+import { links } from '@/lib/links';
+
+const DEFAULT_MESSAGE = 'Hola, quiero cotizar en su taller.';
+---
+
+<section class="section quote" id="cotizar">
+  <div class="container">
+    <SectionHeader kicker="Cotiza en un minuto">
+      Cuéntanos qué tiene tu <span class="script">carro</span>
+      <p class="lead" slot="lead">
+        Marca lo que notas y te armamos el mensaje. Tú lo revisas y lo mandas por WhatsApp.
+      </p>
+    </SectionHeader>
+
+    <div class="quote__grid">
+      <form class="quote__form" data-quote-form data-reveal>
+        <fieldset class="quote__step">
+          <legend>
+            <i>1</i>¿Qué le notas?
+          </legend>
+          <div class="chips">
+            {SYMPTOM_OPTIONS.map((option) => (
+              <label class="chip">
+                <input type="checkbox" name="symptom" value={option.value} />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <div class="quote__step">
+          <label class="quote__label" for="vehicle">
+            <i>2</i>¿Qué carro es?
+          </label>
+          <input
+            class="quote__input"
+            id="vehicle"
+            name="vehicle"
+            type="text"
+            maxlength="80"
+            autocomplete="off"
+            placeholder="Ej. Nissan Sentra 2015 o Ford F-150 2008"
+          />
+        </div>
+        <fieldset class="quote__step">
+          <legend>
+            <i>3</i>¿Cuándo te gustaría venir?
+          </legend>
+          <div class="chips">
+            {VISIT_OPTIONS.map((option, i) => (
+              <label class="chip">
+                <input
+                  type="radio"
+                  name="visit"
+                  value={option.value}
+                  checked={i === VISIT_OPTIONS.length - 1}
+                />
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="quote__preview" data-reveal>
+        <div class="phone">
+          <div class="phone__bar">
+            <Image src={logo} alt="" width={38} height={38} densities={[1, 2]} />
+            <div>
+              {BUSINESS.name}
+              <small>WhatsApp · {BUSINESS.phone.display}</small>
+            </div>
+          </div>
+          <div class="phone__bubble" data-quote-preview>
+            {DEFAULT_MESSAGE}
+          </div>
+        </div>
+        <Button
+          href={links.whatsapp(DEFAULT_MESSAGE)}
+          variant="whatsapp"
+          icon="whatsapp"
+          class="quote__send"
+          data-quote-send
+        >
+          Abrir en WhatsApp
+        </Button>
+        <p class="quote__note">Se abre WhatsApp con este texto. Puedes cambiarlo antes de mandarlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { links } from '@/lib/links';
+
+  const joinList = (items: string[]) =>
+    items.length > 1 ? `${items.slice(0, -1).join(', ')} y ${items.at(-1)}` : (items[0] ?? '');
+
+  const form = document.querySelector<HTMLFormElement>('[data-quote-form]');
+  const preview = document.querySelector('[data-quote-preview]');
+  const send = document.querySelector<HTMLAnchorElement>('[data-quote-send]');
+
+  if (form && preview && send) {
+    const buildMessage = () => {
+      const data = new FormData(form);
+      const symptoms = data.getAll('symptom').map(String);
+      const vehicle = String(data.get('vehicle') ?? '')
+        .trim()
+        .slice(0, 80);
+      const visit = String(data.get('visit') ?? 'cuando tengan lugar');
+
+      let message = 'Hola, quiero cotizar en su taller.';
+      if (vehicle) message += `\nMi carro es ${vehicle}.`;
+      if (symptoms.length) message += `\nLe noto que ${joinList(symptoms)}.`;
+      message += `\n¿Puedo ir ${visit}?`;
+
+      preview.textContent = message;
+      send.href = links.whatsapp(message);
+    };
+
+    form.addEventListener('input', buildMessage);
+    form.addEventListener('change', buildMessage);
+    form.addEventListener('submit', (event) => event.preventDefault());
+    buildMessage();
+  }
+</script>
+
+<style>
+  .quote {
+    background: var(--white);
+    border-block: 1px solid var(--line);
+  }
+
+  .quote__grid {
+    display: grid;
+    gap: 1.875rem;
+  }
+
+  @media (min-width: 980px) {
+    .quote__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 3.75rem;
+    }
+  }
+
+  .quote__step {
+    min-width: 0;
+    margin: 0;
+    padding: 1.375rem 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .quote__step:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .quote__step legend,
+  .quote__label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+    padding: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Saca el legend del borde del fieldset */
+  .quote__step legend {
+    float: left;
+    width: 100%;
+  }
+
+  .quote__step legend + * {
+    clear: both;
+  }
+
+  .quote__step i {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--blue);
+    color: var(--white);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chip {
+    position: relative;
+  }
+
+  .chip input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .chip span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3.125rem;
+    padding: 0 1.125rem;
+    border-radius: 62.4375rem;
+    background: var(--bone);
+    box-shadow: inset 0 0 0 1.5px var(--line);
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s;
+  }
+
+  .chip input:checked + span {
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: none;
+  }
+
+  .chip input:checked + span::before {
+    content: '✓';
+  }
+
+  .chip input:focus-visible + span {
+    outline: 3px solid var(--blue-bright);
+    outline-offset: 3px;
+  }
+
+  .quote__input {
+    width: 100%;
+    min-height: 3.5rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #b8c0d1;
+    border-radius: 2px;
+    background: var(--white);
+    color: var(--ink);
+  }
+
+  .quote__input:focus {
+    border-color: var(--blue-bright);
+    outline: 3px solid var(--blue-bright);
+    outline-offset: 1px;
+  }
+
+  @media (min-width: 980px) {
+    .quote__preview {
+      position: sticky;
+      top: 7.5rem;
+      align-self: start;
+    }
+  }
+
+  .phone {
+    padding: 1.125rem 1rem;
+    border-radius: 1.625rem;
+    background: #e9e2d7;
+    box-shadow: inset 0 0 0 0.5625rem var(--ink);
+  }
+
+  .phone__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: -0.5625rem -0.4375rem 0.875rem;
+    padding: 0.75rem 0.875rem;
+    border-radius: 1rem 1rem 0.25rem 0.25rem;
+    background: #0e5e3a;
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .phone__bar img {
+    width: 2.375rem;
+    height: 2.375rem;
+    border-radius: 50%;
+    background: var(--white);
+    object-fit: cover;
+    object-position: 8% 50%;
+  }
+
+  .phone__bar small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    opacity: 0.85;
+  }
+
+  .phone__bubble {
+    min-height: 5rem;
+    margin-left: 12%;
+    padding: 0.75rem 0.875rem;
+    border-radius: 0.625rem 0.625rem 2px 0.625rem;
+    background: #d9fdd3;
+    color: #111;
+    font-size: 1.0625rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.12);
+  }
+
+  .quote :global(.quote__send) {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .quote__note {
+    margin: 0.625rem 0 0;
+    color: var(--gray);
+    font-size: 0.9375rem;
+  }
+</style>

@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/images/logo.png';
+import { BUSINESS } from '@/config/business';
+import { SERVICES } from '@/data/services';
+import { getHoursSummary } from '@/lib/hours';
+import { links } from '@/lib/links';
+
+const { address, author } = BUSINESS;
+const year = new Date().getFullYear();
+const authorUrl: string = author.url;
+const SignatureTag = authorUrl ? 'a' : 'span';
+const signatureLink = authorUrl ? { href: authorUrl, target: '_blank', rel: 'noopener' } : {};
+---
+
+<footer class="footer">
+  <div class="container footer__columns">
+    <span class="footer__logo">
+      <Image src={logo} alt={BUSINESS.name} height={56} densities={[1, 2]} />
+    </span>
+    <div>
+      <p class="footer__title">Visítanos</p>
+      <p>
+        {address.street}
+        <br />
+        {address.neighborhood}, {address.postalCode}
+        {address.city}
+        <br />
+        {address.entranceNote}
+      </p>
+    </div>
+    <div>
+      <p class="footer__title">Contacto</p>
+      <p class="tabular">
+        Celular y WhatsApp: <a href={links.phone}>{BUSINESS.phone.display}</a>
+        <br />
+        Taller (fijo): <a href={links.landline}>{BUSINESS.landline.display}</a>
+        <br />
+        {getHoursSummary()}
+        <br />
+        <a href={BUSINESS.facebook} target="_blank" rel="noopener">
+          Facebook
+        </a>
+      </p>
+    </div>
+    <nav aria-label="Servicios">
+      <p class="footer__title">Servicios</p>
+      <ul class="footer__links">
+        {SERVICES.map((service) => (
+          <li>
+            <a href={`/${service.slug}`}>{service.name}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <div class="container footer__legal">
+    <span>
+      © {year} {BUSINESS.name} · <a href="/aviso-de-privacidad">Aviso de privacidad</a>
+    </span>
+    <SignatureTag class="signature" {...signatureLink}>
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M81.2 32 A36 36 0 1 0 81.2 68" fill="none" stroke="#FFFFFF" stroke-width="14"></path>
+        <rect x="40" y="33" width="12" height="34" fill="#3B7BFF"></rect>
+      </svg>
+      <span>
+        Sitio hecho por <b>{author.name}</b>
+      </span>
+    </SignatureTag>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--blue-night);
+    color: var(--muted-on-dark);
+  }
+
+  .footer a {
+    color: var(--muted-on-dark);
+  }
+
+  .footer a:hover {
+    color: var(--white);
+  }
+
+  .footer__columns {
+    display: grid;
+    gap: 1.75rem;
+    align-items: start;
+    padding-block: 3rem 2.25rem;
+  }
+
+  @media (min-width: 760px) {
+    .footer__columns {
+      grid-template-columns: auto 1fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  .footer__logo {
+    display: inline-block;
+    justify-self: start;
+    padding: 0.25rem 0.375rem;
+    border-radius: 2px;
+    background: var(--white);
+    line-height: 0;
+  }
+
+  .footer__logo img {
+    width: auto;
+    height: 3.5rem;
+  }
+
+  .footer__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .footer p {
+    margin: 0.375rem 0 0;
+  }
+
+  .footer__links {
+    margin: 0.375rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding-block: 1.125rem 1.625rem;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+    font-size: 0.9375rem;
+  }
+
+  /* Deja libre el espacio del botón flotante de WhatsApp */
+  @media (min-width: 900px) {
+    .footer__legal {
+      padding-bottom: 7rem;
+    }
+  }
+
+  .signature {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+  }
+
+  .signature svg {
+    width: 1.625rem;
+    height: 1.625rem;
+    flex: none;
+  }
+
+  .signature b {
+    color: var(--white);
+  }
+</style>

@@ -1,0 +1,230 @@
+---
+import { Picture } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Kicker from '@/components/ui/Kicker.astro';
+import heroImage from '@/assets/images/hero.jpg';
+import { BUSINESS } from '@/config/business';
+import { getHoursSummary } from '@/lib/hours';
+import { links } from '@/lib/links';
+
+const foundingYear = BUSINESS.foundingDate.slice(0, 4);
+---
+
+<section class="hero on-photo" data-hero aria-labelledby="hero-title">
+  <div class="hero__photo">
+    <Picture
+      src={heroImage}
+      alt="Camioneta sobre la rampa de alineación con los sensores puestos en la llanta"
+      widths={[480, 768, 991]}
+      sizes="(min-width: 980px) 66vw, 100vw"
+      formats={['avif', 'webp']}
+      loading="eager"
+      fetchpriority="high"
+      data-hero-image
+    />
+  </div>
+  <div class="container hero__content">
+    <Kicker data-hero-fade>
+      <span>
+        Taller familiar desde {foundingYear}
+        <span class="hero__kicker-place">· Colonia Campesina · Chihuahua</span>
+      </span>
+    </Kicker>
+    <h1 class="heading hero__title" id="hero-title" data-hero-title>
+      Alineación
+      <br />y suspensión
+      <br />
+      <span class="script">en la Campesina</span>
+    </h1>
+    <p class="lead hero__lead" data-hero-fade>
+      Rótulas, terminales, bujes, amortiguadores, alineación y balanceo. Te decimos qué tiene tu carro y
+      cuánto cuesta antes de empezar.
+    </p>
+    <div class="hero__actions" data-hero-fade>
+      <Button href="#cotizar" variant="white">
+        Cotizar en un minuto
+      </Button>
+      <ArrowLink href="#servicios">Ver servicios</ArrowLink>
+    </div>
+    <div class="hero__facts" data-hero-fade>
+      <span>
+        <span class="hero__star">★</span> <b>{BUSINESS.rating.value}</b> en Google
+      </span>
+      <span class="open-status" data-open-status>
+        <span class="open-status__dot"></span>
+        <span data-open-status-label>{getHoursSummary()}</span>
+      </span>
+      <span class="hero__phone">
+        <b>Tel.</b>{' '}
+        <a href={links.phone} class="tabular">
+          {BUSINESS.phone.display}
+        </a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/open-status';
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--blue-night);
+    color: var(--white);
+  }
+
+  /* En celular la barra fija de abajo tapa parte de la pantalla: el hero termina antes */
+  @media (max-width: 899px) {
+    .hero {
+      min-height: calc(100svh - var(--action-bar-height));
+    }
+
+    .hero__kicker-place,
+    .hero__phone {
+      display: none;
+    }
+  }
+
+  .hero__photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero__photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 55%;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      0deg,
+      rgb(10 20 53 / 0.96) 0%,
+      rgb(10 20 53 / 0.72) 38%,
+      rgb(10 20 53 / 0.25) 70%,
+      rgb(10 20 53 / 0.55) 100%
+    );
+  }
+
+  @media (min-width: 980px) {
+    .hero__photo {
+      left: 34%;
+    }
+
+    .hero__photo :global(img) {
+      object-position: 50% 60%;
+    }
+
+    .hero::before {
+      background:
+        linear-gradient(
+          90deg,
+          var(--blue-night) 0%,
+          var(--blue-night) 30%,
+          rgb(10 20 53 / 0.85) 44%,
+          rgb(10 20 53 / 0.2) 72%,
+          rgb(10 20 53 / 0.35) 100%
+        ),
+        linear-gradient(0deg, rgb(10 20 53 / 0.7), transparent 40%);
+    }
+  }
+
+  .hero__content {
+    width: 100%;
+    padding-top: 7.5rem;
+    padding-bottom: clamp(2.25rem, 6vh, 4.5rem);
+  }
+
+  .hero__title {
+    max-width: 11ch;
+    font-size: clamp(3.3rem, 8.4vw, 7.2rem);
+    line-height: 0.95;
+  }
+
+  .hero__title .script {
+    position: relative;
+    margin-top: 0.06em;
+    font-size: 1.05em;
+  }
+
+  .hero__title .script::after {
+    content: '';
+    position: absolute;
+    left: 0.05em;
+    right: 0.25em;
+    bottom: 0.04em;
+    height: 0.07em;
+    border-radius: 6.1875rem;
+    background: var(--blue-bright);
+    transform-origin: left;
+    transform: scaleX(var(--underline, 1));
+  }
+
+  .hero__lead {
+    margin-top: 1.375rem;
+    color: #d3dbee;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.875rem 1.625rem;
+    margin-top: 1.875rem;
+  }
+
+  .hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem 1.625rem;
+    margin-top: 2.125rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--muted-on-dark);
+    font-size: 1rem;
+  }
+
+  .hero__facts b {
+    color: var(--white);
+  }
+
+  .hero__facts a {
+    text-decoration: none;
+  }
+
+  .hero__star {
+    color: #ffd15c;
+  }
+
+  .open-status__dot {
+    display: inline-block;
+    width: 0.625rem;
+    height: 0.625rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: #8b93a7;
+  }
+
+  .open-status[data-state='open'] .open-status__dot {
+    background: #3ddc84;
+    box-shadow: 0 0 0 0.25rem rgb(61 220 132 / 0.22);
+  }
+
+  .open-status[data-state='closed'] .open-status__dot {
+    background: #ff7a5c;
+  }
+</style>

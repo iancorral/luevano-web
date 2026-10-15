@@ -1,0 +1,64 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { links, WHATSAPP_GREETING } from '@/lib/links';
+---
+
+<nav class="action-bar" aria-label="Acciones rápidas">
+  <a href={links.phone}>
+    <Icon name="phone" />
+    Llamar
+  </a>
+  <a class="action-bar__whatsapp" href={links.whatsapp(WHATSAPP_GREETING)} target="_blank" rel="noopener">
+    <Icon name="whatsapp" />
+    WhatsApp
+  </a>
+  <a href={links.directions} target="_blank" rel="noopener">
+    <Icon name="pin" />
+    Cómo llegar
+  </a>
+</nav>
+
+<style>
+  .action-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem calc(0.625rem + env(safe-area-inset-bottom, 0px));
+    background: var(--blue-dark);
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+  }
+
+  .action-bar a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 3.875rem;
+    border-radius: 3px;
+    background: rgb(255 255 255 / 0.08);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .action-bar :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .action-bar .action-bar__whatsapp {
+    background: var(--whatsapp);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 900px) {
+    .action-bar {
+      display: none;
+    }
+  }
+</style>

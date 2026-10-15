@@ -1,0 +1,102 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { BUSINESS } from '@/config/business';
+import { fullAddress, links } from '@/lib/links';
+---
+
+<BaseLayout
+  title="Aviso de privacidad"
+  description={`Aviso de privacidad simplificado de ${BUSINESS.name}.`}
+  noindex
+>
+  <article class="container legal">
+    <p>
+      <a href="/">← Volver al inicio</a>
+    </p>
+    <h1 class="heading">Aviso de privacidad simplificado</h1>
+    <p class="draft">
+      Borrador para revisar con la dueña del taller. Ajusta nombres y datos antes de publicar.
+    </p>
+
+    <h2>Responsable</h2>
+    <p>
+      <strong>{BUSINESS.name}</strong>, con domicilio en {fullAddress()}, {BUSINESS.address.regionCode}, es
+      responsable del uso de los datos personales que nos compartas.
+    </p>
+
+    <h2>Qué datos usamos</h2>
+    <p>
+      Este sitio no guarda formularios, no usa cookies ni crea cuentas. Si nos escribes por WhatsApp o nos
+      llamas, usamos tu nombre, número de teléfono y los datos de tu vehículo (marca, modelo, año y la falla
+      que nos cuentas).
+    </p>
+
+    <h2>Para qué los usamos</h2>
+    <ul>
+      <li>Darte una cotización y agendar tu visita.</li>
+      <li>Avisarte cuando tu vehículo esté listo.</li>
+      <li>Darte seguimiento sobre el trabajo realizado.</li>
+    </ul>
+    <p>No vendemos ni compartimos tus datos con terceros con fines comerciales.</p>
+
+    <h2>Tus derechos</h2>
+    <p>
+      Puedes pedir acceder, corregir, cancelar u oponerte al uso de tus datos (derechos ARCO) escribiendo por
+      WhatsApp al número
+      <a href={links.whatsapp('Hola, quiero ejercer mis derechos ARCO.')} target="_blank" rel="noopener">
+        {BUSINESS.phone.display}
+      </a>
+    </p>
+
+    <h2>Servicios de terceros</h2>
+    <p>
+      Los botones de WhatsApp, Google Maps y Waze abren servicios externos que tienen sus propios avisos de
+      privacidad.
+    </p>
+
+    <h2>Cambios</h2>
+    <p>Cualquier cambio a este aviso se publicará en esta página.</p>
+    <p>
+      <small>Última actualización: octubre de 2026.</small>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal {
+    max-width: 50rem;
+    padding-top: calc(var(--header-height) + 3rem);
+    padding-bottom: 5rem;
+  }
+
+  .legal h1 {
+    margin-bottom: 0.5rem;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--blue);
+  }
+
+  .legal h2 {
+    margin: 2rem 0 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .legal p,
+  .legal li {
+    color: var(--gray);
+  }
+
+  .legal a {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .draft {
+    padding: 0.75rem 1rem;
+    border-left: 0.25rem solid var(--blue);
+    background: var(--white);
+  }
+</style>

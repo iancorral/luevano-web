@@ -1,0 +1,331 @@
+---
+import Button from '@/components/ui/Button.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import { BUSINESS } from '@/config/business';
+import { getHoursTable } from '@/lib/hours';
+import { fullAddress, links } from '@/lib/links';
+
+const { address } = BUSINESS;
+const contactPerson: string = BUSINESS.contactPerson;
+const shareMessage = `Aquí está el taller: ${BUSINESS.name}, ${fullAddress()}. ${address.entranceNote}. ${links.map}`;
+const copyText = `${BUSINESS.name}, ${fullAddress()}. ${address.entranceNote}.`;
+---
+
+<section class="section section-flush-top" id="llegar">
+  <div class="container">
+    <SectionHeader kicker="Cómo llegar">
+      Estamos por <span class="script">enfrente</span>
+      <Fragment slot="lead">
+        <p class="lead">
+          Busca el letrero azul de <b class="ink">{BUSINESS.name}</b>. La entrada es por el frente, sobre la
+          avenida.
+        </p>
+        {contactPerson && (
+          <p class="lead contact-person">
+            Al llegar, pregunta por <b class="ink">{contactPerson}</b>.
+          </p>
+        )}
+      </Fragment>
+    </SectionHeader>
+
+    <div class="directions">
+      <figure class="sketch" data-reveal>
+        <svg viewBox="0 0 640 400" role="img" aria-labelledby="sketch-title">
+          <title id="sketch-title">
+            Croquis: la entrada de {BUSINESS.name} está al frente, sobre la avenida.
+          </title>
+          <rect width="640" height="400" fill="#FFFFFF"></rect>
+          <rect x="0" y="312" width="640" height="88" fill="#DDE2EC"></rect>
+          <line
+            x1="0"
+            y1="356"
+            x2="640"
+            y2="356"
+            stroke="#FFFFFF"
+            stroke-width="3"
+            stroke-dasharray="22 16"
+          ></line>
+          <text x="24" y="390" class="sketch__street">
+            AVENIDA
+          </text>
+          <rect
+            x="120"
+            y="60"
+            width="400"
+            height="252"
+            fill="#F4F5F8"
+            stroke="#B8C0D1"
+            stroke-width="2"
+            stroke-dasharray="6 6"
+          ></rect>
+          <rect x="120" y="150" width="400" height="162" fill="#15337C"></rect>
+          <rect x="160" y="174" width="320" height="58" rx="2" fill="#FFFFFF"></rect>
+          <text
+            x="320"
+            y="211"
+            text-anchor="middle"
+            textLength="290"
+            lengthAdjust="spacingAndGlyphs"
+            class="sketch__sign"
+          >
+            {BUSINESS.name.toUpperCase()}
+          </text>
+          <text x="320" y="270" text-anchor="middle" class="sketch__here">
+            AQUÍ ES · AL FRENTE
+          </text>
+          <path d="M320 344 v-36" stroke="#0E1426" stroke-width="6" stroke-linecap="round"></path>
+          <path
+            d="M304 322 l16 -18 l16 18"
+            fill="none"
+            stroke="#0E1426"
+            stroke-width="6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <text x="352" y="338" class="sketch__entrance">
+            Entrada
+          </text>
+        </svg>
+        <figcaption>Croquis de referencia, no está a escala.</figcaption>
+      </figure>
+
+      <div data-reveal>
+        <p class="address">
+          {address.street}
+          <br />
+          {address.neighborhood}, {address.postalCode} {address.city}
+        </p>
+        <div class="directions__buttons">
+          <Button href={links.directions} variant="blue" icon="pin">
+            Google Maps
+          </Button>
+          <Button href={links.waze} variant="outline" class="directions__waze">
+            Waze
+          </Button>
+        </div>
+        <div class="directions__extra">
+          <button type="button" class="text-button" data-copy-address={copyText}>
+            Copiar dirección
+          </button>
+          <a class="text-button" href={links.whatsapp(shareMessage)} target="_blank" rel="noopener">
+            Mandar ubicación por WhatsApp
+          </a>
+          <span class="directions__copied" data-copy-feedback role="status"></span>
+        </div>
+        <table class="hours tabular" data-hours-table>
+          <caption class="sr-only">Horario</caption>
+          <tbody>
+            {getHoursTable().map((row) => (
+              <tr data-day={row.day}>
+                <th scope="row">{row.label}</th>
+                <td class:list={{ closed: !row.hours }}>{row.text}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <dl class="directions__phones">
+          <div>
+            <dt>Celular y WhatsApp</dt>
+            <dd>
+              <a href={links.phone} class="tabular">
+                {BUSINESS.phone.display}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Teléfono del taller (fijo)</dt>
+            <dd>
+              <a href={links.landline} class="tabular">
+                {BUSINESS.landline.display}
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/open-status';
+
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-address]');
+  const feedback = document.querySelector<HTMLElement>('[data-copy-feedback]');
+  button?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(button.dataset.copyAddress ?? '');
+      if (!feedback) return;
+      feedback.textContent = 'Copiada';
+      setTimeout(() => (feedback.textContent = ''), 2200);
+    } catch {
+      // Sin permiso de portapapeles: no se hace nada.
+    }
+  });
+</script>
+
+<style>
+  .ink {
+    color: var(--ink);
+  }
+
+  .contact-person {
+    margin-top: 0.875rem;
+  }
+
+  .directions {
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  @media (min-width: 980px) {
+    .directions {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  .sketch {
+    margin: 0;
+    border: 1px solid var(--line);
+    background: var(--white);
+  }
+
+  .sketch svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .sketch__street {
+    fill: #4a5266;
+    font: 600 0.8125rem var(--font-display);
+    letter-spacing: 0.16em;
+  }
+
+  .sketch__sign {
+    fill: #15337c;
+    font: 700 1.375rem var(--font-display);
+  }
+
+  .sketch__here {
+    fill: #9dbbff;
+    font: 600 1rem var(--font-display);
+    letter-spacing: 0.22em;
+  }
+
+  .sketch__entrance {
+    fill: #0e1426;
+    font: 700 0.9375rem var(--font-body);
+  }
+
+  .sketch figcaption {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--gray);
+    font-size: 0.9375rem;
+  }
+
+  .address {
+    margin: 0 0 0.375rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .directions__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin: 1.25rem 0 0.625rem;
+  }
+
+  .directions :global(.directions__waze) {
+    color: var(--blue);
+  }
+
+  .directions__extra {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.375rem;
+    margin-top: 0.5rem;
+  }
+
+  .text-button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--blue);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25rem;
+    cursor: pointer;
+  }
+
+  .directions__copied {
+    color: var(--whatsapp);
+    font-weight: 700;
+    font-size: 0.9375rem;
+  }
+
+  .hours {
+    width: 100%;
+    margin: 1.375rem 0;
+    border-collapse: collapse;
+  }
+
+  .hours th,
+  .hours td {
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--line);
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .hours td {
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .hours td.closed {
+    color: var(--gray);
+    font-weight: 400;
+  }
+
+  .hours :global(tr.is-today) th,
+  .hours :global(tr.is-today) td {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .hours :global(tr.is-today) th::after {
+    content: ' · hoy';
+    font-weight: 400;
+  }
+
+  .directions__phones {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .directions__phones dt {
+    color: var(--gray);
+    font-size: 0.9375rem;
+  }
+
+  .directions__phones dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .directions__phones a {
+    text-decoration: none;
+  }
+</style>

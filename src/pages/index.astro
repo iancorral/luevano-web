@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import ServiceTicker from '@/components/sections/ServiceTicker.astro';
+import Highlights from '@/components/sections/Highlights.astro';
+import ServiceExplorer from '@/components/sections/ServiceExplorer.astro';
+import SuspensionParts from '@/components/sections/SuspensionParts.astro';
+import Review from '@/components/sections/Review.astro';
+import WorkGallery from '@/components/sections/WorkGallery.astro';
+import QuoteBuilder from '@/components/sections/QuoteBuilder.astro';
+import Audiences from '@/components/sections/Audiences.astro';
+import Directions from '@/components/sections/Directions.astro';
+import Faq from '@/components/sections/Faq.astro';
+import ClosingCta from '@/components/sections/ClosingCta.astro';
+import { BUSINESS } from '@/config/business';
+import { GENERAL_FAQ } from '@/data/content';
+
+const description = `Alineación, balanceo y partes de suspensión en la Col. Campesina, Chihuahua. Rótulas, terminales, bujes, amortiguadores y más. Llama o escribe al ${BUSINESS.phone.display}.`;
+---
+
+<BaseLayout description={description} headerOverlay>
+  <Hero />
+  <ServiceTicker />
+  <Highlights />
+  <ServiceExplorer />
+  <SuspensionParts />
+  <Review />
+  <WorkGallery />
+  <QuoteBuilder />
+  <Audiences />
+  <Directions />
+  <Faq items={GENERAL_FAQ} />
+  <ClosingCta href="#cotizar" />
+</BaseLayout>

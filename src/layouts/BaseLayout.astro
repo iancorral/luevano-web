@@ -1,0 +1,98 @@
+---
+import { Font, getImage } from 'astro:assets';
+import '@/styles/global.css';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import MobileActionBar from '@/components/layout/MobileActionBar.astro';
+import WhatsAppFab from '@/components/layout/WhatsAppFab.astro';
+import Shutter from '@/components/layout/Shutter.astro';
+import heroImage from '@/assets/images/hero.jpg';
+import { BUSINESS } from '@/config/business';
+import { IS_PREVIEW_HOST, SITE_URL } from '@/config/site';
+import { localBusinessSchema } from '@/lib/structured-data';
+
+interface Props {
+  title?: string;
+  description: string;
+  schema?: object[];
+  headerOverlay?: boolean;
+  noindex?: boolean;
+}
+
+const { title, description, schema = [], headerOverlay = false, noindex = false } = Astro.props;
+
+const site = Astro.site ?? new URL(SITE_URL);
+const fullTitle = title
+  ? `${title} | ${BUSINESS.name}`
+  : `${BUSINESS.name} · Alineación y suspensión en Chihuahua`;
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = await getImage({ src: heroImage, width: 1200, height: 630, format: 'jpg', quality: 80 });
+const ogImageUrl = new URL(ogImage.src, site).href;
+const structuredData = [localBusinessSchema(site, ogImageUrl), ...schema];
+// Evita que un "</script>" dentro de los datos cierre la etiqueta.
+const jsonLd = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {(noindex || IS_PREVIEW_HOST) && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#0F1E4D" />
+    <meta name="author" content={BUSINESS.author.name} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content={BUSINESS.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-script" />
+    <Font cssVariable="--font-body" preload />
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        root.classList.add('motion-pending');
+        setTimeout(() => root.classList.remove('motion-pending'), 3000);
+        try {
+          if (!sessionStorage.getItem('intro-seen')) {
+            root.dataset.intro = 'pending';
+            sessionStorage.setItem('intro-seen', '1');
+          }
+        } catch {
+          /* sin almacenamiento: no se muestra la cortina */
+        }
+      })();
+    </script>
+    {structuredData.map((data) => (
+      <script type="application/ld+json" set:html={jsonLd(data)} />
+    ))}
+  </head>
+  <body>
+    <Shutter />
+    <Header overlay={headerOverlay} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFab />
+    <MobileActionBar />
+    <script>
+      import '@/scripts/motion';
+    </script>
+  </body>
+</html>

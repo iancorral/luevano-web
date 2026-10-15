@@ -1,0 +1,140 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Kicker from '@/components/ui/Kicker.astro';
+import type { Service } from '@/data/services';
+import { BUSINESS } from '@/config/business';
+import { links } from '@/lib/links';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<section class="service-hero dark" data-hero aria-labelledby="service-title">
+  <div class="container service-hero__grid">
+    <div class="service-hero__text">
+      <nav aria-label="Ruta" class="breadcrumb" data-hero-fade>
+        <a href="/">Inicio</a> <span aria-hidden="true">/</span>{' '}
+        <span aria-current="page">{service.name}</span>
+      </nav>
+      <Kicker data-hero-fade>{service.headline}</Kicker>
+      <h1 class="heading service-hero__title" id="service-title" data-hero-title>
+        {service.name}
+        <br />
+        <span class="script">en Chihuahua</span>
+      </h1>
+      <p class="lead service-hero__lead" data-hero-fade>
+        {service.intro}
+      </p>
+      <div class="service-hero__actions" data-hero-fade>
+        <Button
+          href={links.whatsapp(`Hola, quiero informes de ${service.topic}.`)}
+          variant="whatsapp"
+          icon="whatsapp"
+        >
+          Preguntar por WhatsApp
+        </Button>
+        <Button href={links.phone} variant="outline" icon="phone">
+          {BUSINESS.phone.display}
+        </Button>
+      </div>
+    </div>
+    <div class="service-hero__stage" data-hero-fade>
+      <p class="service-hero__caption">{service.stageCaption}</p>
+      <div class="service-hero__view" data-service-stage data-piece={service.piece}></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import type { ServicePiece } from '@/data/services';
+  import { mountStageWhenNear } from '@/scripts/scene3d/mount';
+
+  const view = document.querySelector<HTMLElement>('[data-service-stage]');
+  if (view) {
+    const piece = view.dataset.piece as ServicePiece;
+    mountStageWhenNear(view, () => piece);
+  }
+</script>
+
+<style>
+  .service-hero {
+    padding-top: calc(var(--header-height) + clamp(2rem, 6vw, 4.5rem));
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+    background: radial-gradient(70% 90% at 75% 40%, #1c3170, var(--blue-night) 70%);
+  }
+
+  .service-hero__grid {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 980px) {
+    .service-hero__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 3.5rem;
+    }
+  }
+
+  .breadcrumb {
+    margin-bottom: 1.375rem;
+    color: var(--muted-on-dark);
+    font-size: 0.9375rem;
+  }
+
+  .breadcrumb a {
+    color: var(--sky);
+  }
+
+  .service-hero__title {
+    font-size: clamp(3rem, 7.4vw, 6.2rem);
+    line-height: 0.95;
+  }
+
+  .service-hero__lead {
+    max-width: 52ch;
+    margin-top: 1.375rem;
+  }
+
+  .service-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.875rem;
+  }
+
+  .service-hero__stage {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: clamp(17.5rem, 40vw, 30rem);
+    border: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .service-hero__caption {
+    margin: 0;
+    padding: 1.125rem 1.375rem 0;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sky);
+  }
+
+  .service-hero__view {
+    position: relative;
+  }
+
+  .service-hero__view :global(canvas) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .service-hero__stage:has([data-stage='unavailable']) {
+    display: none;
+  }
+</style>

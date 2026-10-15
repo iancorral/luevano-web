@@ -1,0 +1,74 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Kicker from '@/components/ui/Kicker.astro';
+
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '/#cotizar', label = 'Armar mi mensaje' } = Astro.props;
+---
+
+<section class="closing dark" aria-labelledby="closing-title">
+  <span class="closing__rings" aria-hidden="true"></span>
+  <div class="container closing__row">
+    <div>
+      <Kicker data-reveal>Tu siguiente paso</Kicker>
+      <h2 class="heading" id="closing-title" data-split>
+        Que tu carro vaya <span class="script">derechito</span>
+      </h2>
+    </div>
+    <div data-reveal>
+      <p>Cuéntanos qué le notas. Empezamos por ahí.</p>
+      <Button href={href} variant="white">
+        {label}
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .closing {
+    position: relative;
+    overflow: hidden;
+    background: var(--blue);
+  }
+
+  .closing__row {
+    display: grid;
+    gap: 1.75rem;
+    align-items: end;
+    padding-block: clamp(4.5rem, 9vw, 7.5rem);
+  }
+
+  @media (min-width: 900px) {
+    .closing__row {
+      grid-template-columns: 1.3fr 1fr;
+    }
+  }
+
+  .closing h2 {
+    font-size: clamp(2.8rem, 6.4vw, 5.4rem);
+  }
+
+  .closing p {
+    margin: 0 0 1.375rem;
+    color: #d3dbee;
+    font-size: 1.15rem;
+  }
+
+  .closing__rings {
+    position: absolute;
+    top: -2.5rem;
+    right: -3.75rem;
+    width: 26.25rem;
+    height: 26.25rem;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.12),
+      0 0 0 2.5rem rgb(255 255 255 / 0.03),
+      0 0 0 5rem rgb(255 255 255 / 0.02);
+    pointer-events: none;
+  }
+</style>

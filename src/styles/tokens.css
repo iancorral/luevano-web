@@ -1,0 +1,26 @@
+/* Colores del logo real. Contrastes medidos sobre su fondo habitual. */
+:root {
+  color-scheme: light;
+
+  --blue: #15337c; /* azul del logo */
+  --blue-dark: #0f1e4d; /* fondos oscuros */
+  --blue-night: #0a1435;
+  --blue-bright: #3b6fe0; /* acentos */
+  --sky: #9dbbff; /* letra de rotulista sobre oscuro (8:1) */
+  --bone: #f4f5f8; /* fondo claro */
+  --white: #ffffff;
+  --ink: #0e1426; /* texto (17:1) */
+  --gray: #4a5266; /* texto secundario (7.6:1) */
+  --muted-on-dark: #c9d3ea;
+  --line: #d6dbe6;
+  --whatsapp: #128c4a;
+  --whatsapp-hover: #0e7a3f;
+  --laser-red: #ff3b2f;
+  --laser-green: #3dff8f;
+
+  --gutter: clamp(1.125rem, 4.5vw, 3.5rem);
+  --section-space: clamp(4.5rem, 10vw, 8.75rem);
+  --header-height: 5.25rem;
+  --action-bar-height: calc(5.375rem + env(safe-area-inset-bottom, 0px)); /* barra fija del celular */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}

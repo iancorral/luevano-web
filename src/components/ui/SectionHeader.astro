@@ -1,0 +1,39 @@
+---
+import Kicker from './Kicker.astro';
+
+interface Props {
+  kicker: string;
+  id?: string;
+}
+
+const { kicker, id } = Astro.props;
+---
+
+<div class="section-header">
+  <div>
+    <Kicker data-reveal>{kicker}</Kicker>
+    <h2 class="heading" id={id} data-split>
+      <slot />
+    </h2>
+  </div>
+  {Astro.slots.has('lead') && (
+    <div class="section-header__lead" data-reveal>
+      <slot name="lead" />
+    </div>
+  )}
+</div>
+
+<style>
+  .section-header {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2.25rem, 4.5vw, 3.75rem);
+  }
+
+  @media (min-width: 980px) {
+    .section-header {
+      grid-template-columns: 1.15fr 1fr;
+      align-items: end;
+    }
+  }
+</style>

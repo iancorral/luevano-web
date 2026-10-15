@@ -1,0 +1,104 @@
+---
+import Kicker from '@/components/ui/Kicker.astro';
+import type { FaqItem } from '@/data/services';
+
+interface Props {
+  items: FaqItem[];
+  kicker?: string;
+}
+
+const { items, kicker = 'Preguntas' } = Astro.props;
+---
+
+<section class="section section-flush-top" id="preguntas">
+  <div class="container faq">
+    <div>
+      <Kicker data-reveal>{kicker}</Kicker>
+      <h2 class="heading" data-split>
+        Antes de <span class="script">venir</span>
+      </h2>
+    </div>
+    <div class="faq__list" data-reveal>
+      {items.map((item) => (
+        <details>
+          <summary>
+            {item.question}
+            <span class="faq__toggle" aria-hidden="true">
+              +
+            </span>
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    display: grid;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  @media (min-width: 980px) {
+    .faq {
+      grid-template-columns: 1.15fr 1fr;
+    }
+  }
+
+  .faq__list {
+    min-width: 0;
+  }
+
+  details {
+    border-top: 1px solid var(--line);
+  }
+
+  details:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__toggle {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+    font-size: 1.25rem;
+    transition:
+      transform 0.3s var(--ease-out),
+      background-color 0.3s;
+  }
+
+  details[open] .faq__toggle {
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: none;
+    transform: rotate(45deg);
+  }
+
+  details p {
+    max-width: 62ch;
+    margin: 0 0 1.2rem;
+    color: var(--gray);
+  }
+</style>

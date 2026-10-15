@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import { SERVICES } from '@/data/services';
+---
+
+<BaseLayout title="Página no encontrada" description="Esta página no existe." noindex>
+  <section class="container not-found">
+    <p class="not-found__code">404</p>
+    <h1 class="heading">
+      Esta página se <span class="script">desalineó</span>
+    </h1>
+    <p class="lead">No encontramos lo que buscabas. Puedes volver al inicio o ir directo a un servicio.</p>
+    <div class="not-found__actions">
+      <Button href="/">Ir al inicio</Button>
+    </div>
+    <ul class="not-found__links">
+      {SERVICES.map((service) => (
+        <li>
+          <a href={`/${service.slug}`}>{service.name}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-top: calc(var(--header-height) + 4rem);
+    padding-bottom: 6rem;
+  }
+
+  .not-found__code {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(5rem, 16vw, 10rem);
+    line-height: 1;
+    color: var(--line);
+  }
+
+  .not-found h1 {
+    margin-bottom: 1.125rem;
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+  }
+
+  .not-found__actions {
+    margin-top: 1.75rem;
+  }
+
+  .not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem 1.5rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .not-found__links a {
+    color: var(--blue);
+    font-weight: 700;
+  }
+</style>

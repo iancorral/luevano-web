@@ -1,0 +1,41 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHero from '@/components/sections/ServiceHero.astro';
+import ServiceTicker from '@/components/sections/ServiceTicker.astro';
+import ServiceDetails from '@/components/sections/ServiceDetails.astro';
+import SuspensionParts from '@/components/sections/SuspensionParts.astro';
+import Faq from '@/components/sections/Faq.astro';
+import OtherServices from '@/components/sections/OtherServices.astro';
+import ClosingCta from '@/components/sections/ClosingCta.astro';
+import { SERVICES, type Service } from '@/data/services';
+import { SITE_URL } from '@/config/site';
+import { serviceSchema } from '@/lib/structured-data';
+
+export const getStaticPaths = (() =>
+  SERVICES.map((service) => ({
+    params: { service: service.slug },
+    props: { service },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const site = Astro.site ?? new URL(SITE_URL);
+---
+
+<BaseLayout
+  title={service.seoTitle}
+  description={service.seoDescription}
+  schema={serviceSchema(site, service)}
+>
+  <ServiceHero service={service} />
+  <ServiceTicker />
+  <ServiceDetails service={service} />
+  {service.piece === 'suspension' && <SuspensionParts showPageLink={false} />}
+  <Faq items={service.faq} kicker={`Preguntas sobre ${service.topic}`} />
+  <OtherServices currentSlug={service.slug} />
+  <ClosingCta />
+</BaseLayout>

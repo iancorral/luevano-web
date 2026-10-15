@@ -1,0 +1,303 @@
+---
+import { Image } from 'astro:assets';
+import Button from '@/components/ui/Button.astro';
+import logo from '@/assets/images/logo.png';
+import { BUSINESS } from '@/config/business';
+import { links, WHATSAPP_GREETING } from '@/lib/links';
+
+interface Props {
+  overlay?: boolean; // transparente sobre la foto del hero hasta que se baja
+}
+
+const { overlay = false } = Astro.props;
+
+const nav = [
+  { href: '/#servicios', label: 'Servicios' },
+  { href: '/suspension', label: 'Suspensión' },
+  { href: '/#cotizar', label: 'Cotizar' },
+  { href: '/#llegar', label: 'Cómo llegar' },
+];
+---
+
+<header class:list={['header', { 'is-solid': !overlay }]} data-header data-overlay={overlay ? '' : undefined}>
+  <div class="container header__row">
+    <a href="/" class="header__logo" aria-label={`${BUSINESS.name}, inicio`}>
+      <Image src={logo} alt={BUSINESS.name} height={50} densities={[1, 2]} loading="eager" />
+    </a>
+    <nav class="header__nav" aria-label="Secciones">
+      {nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="header__actions">
+      <a class="header__phone tabular" href={links.phone}>
+        {BUSINESS.phone.display}
+      </a>
+      <Button
+        href={links.whatsapp(WHATSAPP_GREETING)}
+        variant="whatsapp"
+        icon="whatsapp"
+        size="sm"
+        class="header__whatsapp"
+      >
+        WhatsApp
+      </Button>
+      <button
+        type="button"
+        class="header__menu-button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-button
+      >
+        <span class="header__menu-icon" aria-hidden="true"></span>
+        Menú
+      </button>
+    </div>
+  </div>
+  <nav class="header__menu" id="mobile-menu" aria-label="Menú" hidden data-menu>
+    <ul class="container">
+      {nav.map((item) => (
+        <li>
+          <a href={item.href}>{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <span class="header__progress" data-scroll-progress aria-hidden="true"></span>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  let menuOpen = false;
+
+  const updateSolid = () => {
+    if (!header?.hasAttribute('data-overlay')) return;
+    header.classList.toggle('is-solid', menuOpen || window.scrollY > 60);
+  };
+
+  const setMenu = (open: boolean) => {
+    if (!menuButton || !menu) return;
+    menuOpen = open;
+    menu.hidden = !open;
+    menuButton.setAttribute('aria-expanded', String(open));
+    header?.classList.toggle('is-menu-open', open);
+    updateSolid();
+  };
+
+  menuButton?.addEventListener('click', () => setMenu(!menuOpen));
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuOpen) {
+      setMenu(false);
+      menuButton?.focus();
+    }
+  });
+
+  window.addEventListener('scroll', updateSolid, { passive: true });
+  updateSolid();
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    padding-top: env(safe-area-inset-top, 0px);
+    color: var(--white);
+    transition:
+      background-color 0.4s,
+      box-shadow 0.4s;
+  }
+
+  .header.is-solid {
+    background: var(--blue-dark);
+    box-shadow: 0 0.5rem 1.875rem -1.125rem rgb(0 0 0 / 0.6);
+  }
+
+  .header__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.125rem;
+    padding-block: 0.875rem;
+  }
+
+  .header__logo {
+    display: block;
+    padding: 0.25rem 0.375rem;
+    border-radius: 2px;
+    background: var(--white);
+    line-height: 0;
+  }
+
+  .header__logo img {
+    width: auto;
+    height: 3.125rem;
+  }
+
+  .header__nav {
+    display: none;
+    gap: 1.875rem;
+  }
+
+  .header__nav a {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #e2e8f6;
+  }
+
+  .header__nav a:hover {
+    color: var(--white);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .header__phone {
+    display: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Guía láser: avanza con la lectura de la página */
+  .header__progress {
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue-bright), var(--sky));
+    transform-origin: left;
+    transform: scaleX(var(--progress, 0));
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .is-solid .header__progress {
+    opacity: 1;
+  }
+
+  /* En celular WhatsApp y Llamar ya están en la barra fija de abajo */
+  .header :global(.header__whatsapp) {
+    display: none;
+  }
+
+  .header__menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 0.12);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  /* Tres rayas que se vuelven una X al abrir */
+  .header__menu-icon,
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    display: block;
+    width: 1.125rem;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.25s var(--ease-out);
+  }
+
+  .header__menu-icon {
+    position: relative;
+  }
+
+  .header__menu-icon::before,
+  .header__menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .header__menu-icon::before {
+    transform: translateY(-0.375rem);
+  }
+
+  .header__menu-icon::after {
+    transform: translateY(0.375rem);
+  }
+
+  .is-menu-open .header__menu-icon {
+    background: transparent;
+  }
+
+  .is-menu-open .header__menu-icon::before {
+    transform: rotate(45deg);
+  }
+
+  .is-menu-open .header__menu-icon::after {
+    transform: rotate(-45deg);
+  }
+
+  .header__menu {
+    background: var(--blue-dark);
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .header__menu ul {
+    margin: 0;
+    padding-block: 0.5rem 1.25rem;
+    list-style: none;
+  }
+
+  .header__menu a {
+    display: block;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  @media (min-width: 760px) {
+    .header__phone {
+      display: block;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .header :global(.header__whatsapp) {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .header__nav {
+      display: flex;
+    }
+
+    .header__menu-button,
+    .header__menu {
+      display: none;
+    }
+  }
+</style>

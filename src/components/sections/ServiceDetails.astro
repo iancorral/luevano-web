@@ -1,0 +1,99 @@
+---
+import Kicker from '@/components/ui/Kicker.astro';
+import type { Service } from '@/data/services';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<section class="section" aria-label={`${service.name}: cuándo venir y qué hacemos`}>
+  <div class="container details">
+    <div>
+      <Kicker data-reveal>Cuándo venir</Kicker>
+      <h2 class="heading" data-split>
+        Si notas <span class="script">esto</span>
+      </h2>
+      <ul class="signs" data-reveal>
+        {service.signs.map((sign) => (
+          <li>{sign}</li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <Kicker data-reveal>Qué hacemos</Kicker>
+      <h2 class="heading" data-split>
+        Paso a <span class="script">paso</span>
+      </h2>
+      <ol class="steps" data-reveal>
+        {service.steps.map((step) => (
+          <li>{step}</li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .details {
+    display: grid;
+    gap: 4rem;
+  }
+
+  @media (min-width: 980px) {
+    .details {
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .signs,
+  .steps {
+    margin: 1.875rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .signs li,
+  .steps li {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.1rem;
+  }
+
+  .signs li::before {
+    content: '';
+    flex: none;
+    width: 0.625rem;
+    height: 0.625rem;
+    margin-top: 0.55em;
+    border-radius: 50%;
+    background: var(--blue-bright);
+  }
+
+  .steps {
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.125rem;
+    height: 2.125rem;
+    border-radius: 50%;
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+</style>

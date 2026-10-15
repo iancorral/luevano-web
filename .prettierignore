@@ -1,0 +1,6 @@
+dist/
+.astro/
+node_modules/
+_material/
+package-lock.json
+public/_headers
