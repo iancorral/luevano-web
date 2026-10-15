@@ -248,6 +248,26 @@ const DEFAULT_MESSAGE = 'Hola, quiero cotizar en su taller.';
     outline-offset: 3px;
   }
 
+  /* En celular, rejilla de 2 columnas iguales; si sobra una opción, ocupa todo el renglón */
+  @media (max-width: 759px) {
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .chip:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .chip span {
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem 0.75rem;
+      text-align: center;
+    }
+  }
+
   .quote__input {
     width: 100%;
     min-height: 3.5rem;

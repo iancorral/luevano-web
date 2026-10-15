@@ -58,7 +58,7 @@ export const VISIT_OPTIONS = [
   { label: 'Hoy', value: 'hoy' },
   { label: 'Mañana', value: 'mañana' },
   { label: 'Sábado', value: 'el sábado' },
-  { label: 'Cuando tengan lugar', value: 'cuando tengan lugar' },
+  { label: 'Cualquier día', value: 'cuando tengan lugar' },
 ] as const;
 
 export interface Audience {

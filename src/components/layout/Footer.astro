@@ -109,6 +109,31 @@ const signatureLink = authorUrl ? { href: authorUrl, target: '_blank', rel: 'noo
     line-height: 0;
   }
 
+  /* En celular todo centrado */
+  @media (max-width: 759px) {
+    .footer__columns {
+      justify-items: center;
+      text-align: center;
+    }
+
+    .footer__logo {
+      justify-self: center;
+    }
+
+    .footer__links {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      justify-content: center;
+      gap: 0.25rem 2rem;
+    }
+
+    .footer__legal {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
   .footer__logo img {
     width: auto;
     height: 3.5rem;

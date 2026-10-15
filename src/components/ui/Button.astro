@@ -48,6 +48,13 @@ const isExternal = /^https?:\/\//.test(href);
       transform 0.15s;
   }
 
+  /* En celular todos los botones miden lo mismo: a todo lo ancho */
+  @media (max-width: 759px) {
+    .button--md {
+      width: 100%;
+    }
+  }
+
   .button :global(svg) {
     width: 1.375rem;
     height: 1.375rem;
