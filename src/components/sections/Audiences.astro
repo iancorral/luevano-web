@@ -26,7 +26,7 @@ import { links } from '@/lib/links';
               formats={['avif', 'webp']}
             />
           </div>
-          <div data-reveal>
+          <div class="audience__body" data-reveal>
             <h3>{audience.title}</h3>
             <ul>
               {audience.points.map((point) => (
@@ -47,10 +47,26 @@ import { links } from '@/lib/links';
     gap: 2.75rem;
   }
 
+  /* subgrid: foto, título, lista y enlace quedan a la misma altura en las 3 columnas,
+     aunque un título ocupe dos renglones */
   @media (min-width: 900px) {
     .audiences {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem;
+      column-gap: 2rem;
+      row-gap: 0;
+    }
+
+    .audience {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+    }
+
+    .audience__body {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      justify-items: start;
     }
   }
 

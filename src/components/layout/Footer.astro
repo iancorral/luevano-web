@@ -54,19 +54,21 @@ const signatureLink = authorUrl ? { href: authorUrl, target: '_blank', rel: 'noo
       </ul>
     </nav>
   </div>
-  <div class="container footer__legal">
-    <span>
-      © {year} {BUSINESS.name} · <a href="/aviso-de-privacidad">Aviso de privacidad</a>
-    </span>
-    <SignatureTag class="signature" {...signatureLink}>
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M81.2 32 A36 36 0 1 0 81.2 68" fill="none" stroke="#FFFFFF" stroke-width="14"></path>
-        <rect x="40" y="33" width="12" height="34" fill="#3B7BFF"></rect>
-      </svg>
+  <div class="container">
+    <div class="footer__legal">
       <span>
-        Sitio hecho por <b>{author.name}</b>
+        © {year} {BUSINESS.name} · <a href="/aviso-de-privacidad">Aviso de privacidad</a>
       </span>
-    </SignatureTag>
+      <SignatureTag class="signature" {...signatureLink}>
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M81.2 32 A36 36 0 1 0 81.2 68" fill="none" stroke="#FFFFFF" stroke-width="14"></path>
+          <rect x="40" y="33" width="12" height="34" fill="#3B7BFF"></rect>
+        </svg>
+        <span>
+          Sitio hecho por <b>{author.name}</b>
+        </span>
+      </SignatureTag>
+    </div>
   </div>
 </footer>
 

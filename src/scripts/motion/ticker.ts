@@ -21,7 +21,7 @@ export function initTicker(): void {
         direction = self.direction;
         const boost = Math.min(Math.abs(self.getVelocity()) / 350, 5);
         gsap
-          .timeline({ overwrite: true })
+          .timeline({ defaults: { overwrite: 'auto' } })
           .to(loop, { timeScale: direction * (1 + boost), duration: 0.2, ease: 'power1.out' })
           .to(loop, { timeScale: direction, duration: 1.4, ease: 'power2.out' });
       },

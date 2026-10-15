@@ -24,7 +24,7 @@ interface Slot {
 }
 
 const FOV = 30;
-const FILL = 0.92; // margen alrededor de la pieza (1 = toca los bordes)
+const FILL = 1.06; // margen alrededor de la pieza (1 = toca los bordes)
 
 // Distancia del origen al vértice más lejano: la pieza cabe en cualquier ángulo de giro.
 function measureRadius(piece: Piece): number {

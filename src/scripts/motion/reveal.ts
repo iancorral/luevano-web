@@ -36,7 +36,9 @@ function revealBlocks(): void {
         duration: 0.9,
         ease: 'power3.out',
         stagger: 0.08,
-        overwrite: true,
+        // 'auto' solo corta animaciones de las mismas propiedades; con true se cortaba
+        // también la línea del kicker y se quedaba a medias.
+        overwrite: 'auto',
       }),
   });
 }
