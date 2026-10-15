@@ -51,5 +51,6 @@ Trabajadores de maquila por turnos (importa el sábado y "esperas aquí"), autos
 - Los datos del negocio viven solo en `src/config/business.ts`; nunca duplicarlos en el HTML.
 - Textos en español de México, frases cortas, tuteo, sin tecnicismos sin explicar.
 - Antes de entregar: `npm test`, `npm run build` (incluye `astro check`) y `npm run lint`.
-- El repo solo está en local. **No subirlo a GitHub** hasta que Ian lo pida.
+- Repo **privado** en GitHub: `iancorral/luevano-web` (rama `main`). Vercel publica cada push.
+- Commits solo a nombre de Ian, **sin** "Co-Authored-By" ni menciones a Claude.
 - Ian prefiere respuestas concisas con ejemplos y justificación antes de implementar.
